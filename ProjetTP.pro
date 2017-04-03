@@ -25,10 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    idwindow.cpp
+    idwindow.cpp \
+    addpatient.cpp
 
 HEADERS  += mainwindow.h \
-    idwindow.h
+    idwindow.h \
+    addpatient.h
 
 FORMS    += mainwindow.ui \
-    idwindow.ui
+    idwindow.ui \
+    addpatient.ui
+
+DISTFILES +=

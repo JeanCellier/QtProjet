@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     IdWindow id;
     id.show();
+    w.show();
 
 
     return a.exec();
