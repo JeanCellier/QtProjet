@@ -7,9 +7,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    addPatient fenetre;
-    addPatient.exec();
-
 }
 
 MainWindow::~MainWindow()
