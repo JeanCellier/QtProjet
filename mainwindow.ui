@@ -51,8 +51,10 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
+   <addaction name="actionAjouterPatient"/>
+   <addaction name="actionAjouterPersonnelSoins"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionQuitter">
@@ -73,6 +75,19 @@
   <action name="actionA_propos">
    <property name="text">
     <string>A propos</string>
+   </property>
+  </action>
+  <action name="actionAjouterPatient">
+   <property name="text">
+    <string>Ajouter Patient</string>
+   </property>
+   <property name="toolTip">
+    <string>AjouterPatient</string>
+   </property>
+  </action>
+  <action name="actionAjouterPersonnelSoins">
+   <property name="text">
+    <string>Ajouter Personnel Soins</string>
    </property>
   </action>
  </widget>

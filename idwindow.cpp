@@ -23,6 +23,7 @@ void IdWindow::on_pushButton_2_clicked()
 {
     if(isIdValid()){
         accept();
+
     }else{
         int ret = QMessageBox::warning(this, "Erreur de connexion", "Login ou mot de passe incorrect");
         this->ui->lineEdit_2->setText("");
