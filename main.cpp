@@ -5,11 +5,16 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    IdWindow id;
-    id.show();
-    w.show();
+        MainWindow w;
 
+        IdWindow id;
 
-    return a.exec();
+        if(id.exec()==QDialog::Accepted)
+        {
+            w.show();
+            return a.exec();
+        }
+
+        return 0;
+
 }

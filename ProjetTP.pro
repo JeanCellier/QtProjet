@@ -24,9 +24,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
     idwindow.cpp \
-    addpatient.cpp
+    addpatient.cpp \
+    mainwindow.cpp
 
 HEADERS  += mainwindow.h \
     idwindow.h \
