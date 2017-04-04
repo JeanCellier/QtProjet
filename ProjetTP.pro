@@ -27,12 +27,14 @@ SOURCES += main.cpp\
     idwindow.cpp \
     addpatient.cpp \
     mainwindow.cpp \
-    addhealthcareoperator.cpp
+    addhealthcareoperator.cpp \
+    about.cpp
 
 HEADERS  += mainwindow.h \
     idwindow.h \
     addpatient.h \
-    addhealthcareoperator.h
+    addhealthcareoperator.h \
+    about.h
 
 FORMS    += mainwindow.ui \
     idwindow.ui \
