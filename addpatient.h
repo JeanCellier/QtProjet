@@ -15,6 +15,13 @@ public:
     explicit addPatient(QWidget *parent = 0);
     ~addPatient();
 
+private slots:
+    void on_createPatientButton_clicked();
+
+    void on_cancelButton_clicked();
+
+    void on_calendar_selectionChanged();
+
 private:
     Ui::addPatient *ui;
 };

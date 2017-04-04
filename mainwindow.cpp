@@ -22,7 +22,10 @@ void MainWindow::on_actionPatient_triggered(bool checked)
 void MainWindow::on_actionPatient_triggered()
 {
     addPatient addingPatient;
-    addingPatient.exec();
+    if(addingPatient.exec()==QDialog::Accepted)
+    {
+        addingPatient.reject();
+    }
 }
 
 void MainWindow::on_actionPersonnels_de_soins_triggered()

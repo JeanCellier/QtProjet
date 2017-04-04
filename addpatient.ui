@@ -48,7 +48,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="nameLineEdit">
        <property name="placeholderText">
         <string>Nom</string>
        </property>
@@ -62,7 +62,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="fistNameLineEdit">
        <property name="placeholderText">
         <string>Prénom</string>
        </property>
@@ -76,7 +76,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit_3">
+      <widget class="QLineEdit" name="addressLineEdit">
        <property name="placeholderText">
         <string>Adresse</string>
        </property>
@@ -90,7 +90,7 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLineEdit" name="lineEdit_4">
+      <widget class="QLineEdit" name="cityLineEdit">
        <property name="placeholderText">
         <string>Ville</string>
        </property>
@@ -104,7 +104,7 @@
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QLineEdit" name="lineEdit_5">
+      <widget class="QLineEdit" name="zipLineEdit">
        <property name="placeholderText">
         <string>Code postal</string>
        </property>
@@ -118,7 +118,7 @@
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QSpinBox" name="spinBox">
+      <widget class="QSpinBox" name="minutesSpinBox">
        <property name="value">
         <number>60</number>
        </property>
@@ -132,14 +132,14 @@
       </widget>
      </item>
      <item row="8" column="1">
-      <widget class="QLineEdit" name="lineEdit_9">
+      <widget class="QLineEdit" name="dayLineEdit">
        <property name="readOnly">
         <bool>true</bool>
        </property>
       </widget>
      </item>
      <item row="9" column="1">
-      <widget class="QCalendarWidget" name="calendarWidget"/>
+      <widget class="QCalendarWidget" name="calendar"/>
      </item>
      <item row="10" column="0">
       <widget class="QLabel" name="label_7">
@@ -149,7 +149,7 @@
       </widget>
      </item>
      <item row="10" column="1">
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="priorityComboBox">
        <item>
         <property name="text">
          <string>1</string>
@@ -185,7 +185,7 @@
       </widget>
      </item>
      <item row="11" column="1">
-      <widget class="QLineEdit" name="lineEdit_6">
+      <widget class="QLineEdit" name="ressourcesList">
        <property name="readOnly">
         <bool>true</bool>
        </property>
@@ -202,7 +202,7 @@
       </widget>
      </item>
      <item row="13" column="1">
-      <widget class="QLineEdit" name="lineEdit_7">
+      <widget class="QLineEdit" name="phoneNumberLineEdit">
        <property name="placeholderText">
         <string>Numéro de téléphone sans espaces</string>
        </property>
@@ -216,7 +216,7 @@
       </widget>
      </item>
      <item row="14" column="1">
-      <widget class="QLineEdit" name="lineEdit_8">
+      <widget class="QLineEdit" name="commentaryLineEdit">
        <property name="placeholderText">
         <string>Commentaires...</string>
        </property>
@@ -236,28 +236,28 @@
       </spacer>
      </item>
      <item row="16" column="0">
-      <widget class="QPushButton" name="Annuler">
+      <widget class="QPushButton" name="cancelButton">
        <property name="text">
         <string>Annuler</string>
        </property>
       </widget>
      </item>
      <item row="16" column="1">
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="createPatientButton">
        <property name="text">
         <string>Créer ce nouveau patient</string>
        </property>
       </widget>
      </item>
      <item row="12" column="0">
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="addRessourceButton">
        <property name="text">
         <string>Ajouter Ressource</string>
        </property>
       </widget>
      </item>
      <item row="12" column="1">
-      <widget class="QComboBox" name="comboBox_2"/>
+      <widget class="QComboBox" name="ressourcesComboBox"/>
      </item>
     </layout>
    </item>
