@@ -6,7 +6,6 @@ addPatient::addPatient(QWidget *parent) :
     ui(new Ui::addPatient)
 {
     ui->setupUi(this);
-    setModal(true);
 }
 
 addPatient::~addPatient()

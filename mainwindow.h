@@ -15,6 +15,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_actionPatient_triggered(bool checked);
+
+    void on_actionPatient_triggered();
+
+    void on_actionPersonnels_de_soins_triggered();
 
 private:
     Ui::MainWindow *ui;
