@@ -134,7 +134,7 @@
      <item row="8" column="1">
       <widget class="QLineEdit" name="dayLineEdit">
        <property name="readOnly">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>
