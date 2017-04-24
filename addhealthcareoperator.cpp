@@ -33,3 +33,8 @@ void addHealthcareOperator::on_typeBox_currentTextChanged(const QString &arg1)
         }
     }
 }
+
+void addHealthcareOperator::on_cancelButton_clicked()
+{
+    reject();
+}

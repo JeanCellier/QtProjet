@@ -18,6 +18,8 @@ public:
 private slots:
     void on_typeBox_currentTextChanged(const QString &arg1);
 
+    void on_cancelButton_clicked();
+
 private:
     Ui::addHealthcareOperator *ui;
 };

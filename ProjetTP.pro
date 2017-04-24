@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,13 +29,15 @@ SOURCES += main.cpp\
     addpatient.cpp \
     mainwindow.cpp \
     addhealthcareoperator.cpp \
-    about.cpp
+    about.cpp \
+    c_init_bd.cpp
 
 HEADERS  += mainwindow.h \
     idwindow.h \
     addpatient.h \
     addhealthcareoperator.h \
-    about.h
+    about.h \
+    c_init_bd.h
 
 FORMS    += mainwindow.ui \
     idwindow.ui \
