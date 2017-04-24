@@ -15,6 +15,9 @@ public:
     explicit addHealthcareOperator(QWidget *parent = 0);
     ~addHealthcareOperator();
 
+private slots:
+    void on_typeBox_currentTextChanged(const QString &arg1);
+
 private:
     Ui::addHealthcareOperator *ui;
 };

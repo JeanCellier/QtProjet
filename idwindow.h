@@ -17,9 +17,9 @@ public:
     ~IdWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_cancelButton_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_connectButton_clicked();
 
 private:
     Ui::IdWindow *ui;

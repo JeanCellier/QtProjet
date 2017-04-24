@@ -22,7 +22,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_12">
+    <widget class="QLabel" name="titleLabel">
      <property name="text">
       <string>Ajout d'un patient</string>
      </property>
@@ -41,7 +41,7 @@
    <item>
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="nameLabel">
        <property name="text">
         <string>Nom * :</string>
        </property>
@@ -55,7 +55,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="firstNameLabel">
        <property name="text">
         <string>Prénom * :</string>
        </property>
@@ -69,7 +69,7 @@
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="addressLabel">
        <property name="text">
         <string>Adresse * :</string>
        </property>
@@ -83,7 +83,7 @@
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="cityLabel">
        <property name="text">
         <string>Ville * :</string>
        </property>
@@ -97,7 +97,7 @@
       </widget>
      </item>
      <item row="4" column="0">
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="zipCodeLabel">
        <property name="text">
         <string>Code postal * :</string>
        </property>
@@ -111,7 +111,7 @@
       </widget>
      </item>
      <item row="5" column="0">
-      <widget class="QLabel" name="label_11">
+      <widget class="QLabel" name="durationLabel">
        <property name="text">
         <string>Durée de consultation (minutes) * :</string>
        </property>
@@ -125,7 +125,7 @@
       </widget>
      </item>
      <item row="8" column="0">
-      <widget class="QLabel" name="label_6">
+      <widget class="QLabel" name="dayLabel">
        <property name="text">
         <string>Jour de consltation * :</string>
        </property>
@@ -142,7 +142,7 @@
       <widget class="QCalendarWidget" name="calendar"/>
      </item>
      <item row="10" column="0">
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="priorityLabel">
        <property name="text">
         <string>Priorité * :</string>
        </property>
@@ -178,7 +178,7 @@
       </widget>
      </item>
      <item row="11" column="0">
-      <widget class="QLabel" name="label_8">
+      <widget class="QLabel" name="ressourcesLabel">
        <property name="text">
         <string>Ressources * :</string>
        </property>
@@ -195,7 +195,7 @@
       </widget>
      </item>
      <item row="13" column="0">
-      <widget class="QLabel" name="label_9">
+      <widget class="QLabel" name="phoneNumberLabel">
        <property name="text">
         <string>Numéro de téléphone :</string>
        </property>
@@ -209,7 +209,7 @@
       </widget>
      </item>
      <item row="14" column="0">
-      <widget class="QLabel" name="label_10">
+      <widget class="QLabel" name="commentariesLabel">
        <property name="text">
         <string>Commentaires :</string>
        </property>

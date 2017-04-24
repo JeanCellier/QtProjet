@@ -14,24 +14,24 @@ IdWindow::~IdWindow()
     delete ui;
 }
 
-void IdWindow::on_pushButton_clicked()
+void IdWindow::on_cancelButton_clicked()
 {
 
 }
 
-void IdWindow::on_pushButton_2_clicked()
+void IdWindow::on_connectButton_clicked()
 {
     if(isIdValid()){
         accept();
 
     }else{
         int ret = QMessageBox::warning(this, "Erreur de connexion", "Login ou mot de passe incorrect");
-        this->ui->lineEdit_2->setText("");
+        this->ui->passwordLineEdit->setText("");
     }
 }
 
 bool IdWindow::isIdValid(){
-    if(ui->lineEdit->text().size() != 0 && ui->lineEdit_2->text().size() != 0){
+    if(ui->loginLineEdit->text().size() != 0 && ui->passwordLineEdit->text().size() != 0){
        return true;
     }else{
         return false;
