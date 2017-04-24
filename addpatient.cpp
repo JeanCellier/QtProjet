@@ -1,6 +1,9 @@
 #include "addpatient.h"
 #include "ui_addpatient.h"
 #include <QMessageBox>
+#include <stdio.h>
+#include <iostream>
+#include <algorithm>
 
 addPatient::addPatient(QWidget *parent) :
     QDialog(parent),
@@ -42,7 +45,8 @@ void addPatient::on_createPatientButton_clicked()
     }
 
     if(champVide == false){
-
+        //formater les champs majuscule/minuscule
+        // probleme String/QString
     }
     //accept();
 }
@@ -54,5 +58,5 @@ void addPatient::on_cancelButton_clicked()
 
 void addPatient::on_calendar_selectionChanged()
 {
-    this->ui->dayLineEdit->text() = this->ui->calendar->selectedDate().toString();
+    this->ui->dayLineEdit->setText(this->ui->calendar->selectedDate().toString());
 }
