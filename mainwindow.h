@@ -28,6 +28,8 @@ private slots:
 
     void on_actionAjouterPersonnelSoins_triggered();
 
+    void on_toolBox_currentChanged(int index);
+
 private:
     Ui::MainWindow *ui;
 };
