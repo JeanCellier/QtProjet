@@ -1,12 +1,14 @@
 #include "idwindow.h"
 #include "ui_idwindow.h"
 #include <QMessageBox>
+#include <c_init_bd.h>
 
 IdWindow::IdWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::IdWindow)
 {
     ui->setupUi(this);
+    C_INIT_BD::Creation_BD();
 }
 
 IdWindow::~IdWindow()

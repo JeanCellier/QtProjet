@@ -187,3 +187,5 @@ bool C_INIT_BD::Creation_BD()
         return false;
     }
 }
+
+

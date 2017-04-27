@@ -30,14 +30,18 @@ SOURCES += main.cpp\
     mainwindow.cpp \
     addhealthcareoperator.cpp \
     about.cpp \
-    c_init_bd.cpp
+    c_init_bd.cpp \
+    patientDAO.cpp \
+    bdhandler.cpp
 
 HEADERS  += mainwindow.h \
     idwindow.h \
     addpatient.h \
     addhealthcareoperator.h \
     about.h \
-    c_init_bd.h
+    c_init_bd.h \
+    patientDAO.h \
+    bdhandler.h
 
 FORMS    += mainwindow.ui \
     idwindow.ui \
