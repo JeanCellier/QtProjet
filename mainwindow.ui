@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="patientSearch">
      <property name="geometry">
@@ -61,12 +61,12 @@
      <attribute name="label">
       <string>Planification</string>
      </attribute>
-     <widget class="QTableView" name="tableView_2">
+     <widget class="QTreeView" name="ressourceTreeView">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>0</x>
         <y>0</y>
-        <width>411</width>
+        <width>441</width>
         <height>271</height>
        </rect>
       </property>
