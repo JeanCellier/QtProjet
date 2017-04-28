@@ -1,21 +1,46 @@
-#include "patientDAO.h"
+#include "PatientDAO.h"
 #include <QSqlDatabase>
-#include "bdhandler.h"
+#include <QVariant>
+#include <QString>
+#include "BdHandler.h"
+#include <iostream>
 
-patientDAO::patientDAO()
+using namespace std;
+
+PatientDAO::PatientDAO()
 {
     Bdhandler handler;
     this->q = handler.openBD();
 }
 
-patientDAO::~patientDAO()
+PatientDAO::~PatientDAO()
 {
     Bdhandler handler;
     handler.closeBD();
 }
 
-void patientDAO::addPatient(int id, QString name, QString firstName, QString address, QString city, QString zipCode, QString comment, int phoneNumber, QDate consultDate, int consultTime, int priority){
+void PatientDAO::addPatient(int id, QString name, QString firstName, QString address, QString city, QString zipCode, QString comment, int phoneNumber, QDate consultDate, int consultTime, int priority){
     q.exec("INSERT INTO TPatient "
            "SELECT '1' AS 'Id', 'Ricardo' AS 'Nom', 'Jacques' AS 'Prenom', '3 rue des justices' AS 'Adresse', 'Tours' AS 'Ville', '37200' AS 'CP'"
            ", 'Dépressif' AS 'Commentaire', '247558963' AS 'Commentaire', '2013-06-01' AS 'DateConsultation', '90' AS 'DureeConsultation', '2' AS 'Priorite'");
+}
+
+Patient PatientDAO::getPatientById(int id){
+    q.exec("SELECT Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateConsultation, DureeConsultation, Priorite FROM TPatient WHERE Id = "+id+"");
+    while (q.next()) {
+            patient p = new patient(q.value(0).toString().toStdString(), q.value(1).toString().toStdString(), q.value(2).toString().toStdString(),
+                                    q.value(3).toString().toStdString(), q.value(4).toString().toStdString(), q.value(5).toString().toStdString(),
+                                    q.value(6).toString().toStdString(), q.value(7).toString().toStdString(), q.value(8).toString().toStdString(),
+                                    q.value(9).toString().toStdString());
+            return p;
+        }
+    return null;
+}
+
+void PatientDAO::printPatients(){
+    q.exec("SELECT Nom FROM TPatient WHERE Id = 1");
+    while (q.next()) {
+            QString name = q.value(0).toString();
+            cout<<name.toStdString()<<endl;
+        }
 }
