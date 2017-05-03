@@ -5,6 +5,7 @@
 #include "about.h"
 #include "QStandardItemModel"
 #include "QFileSystemModel"
+#include "patientDAO.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -73,11 +74,24 @@ void MainWindow::on_actionAjouterPersonnelSoins_triggered()
 }
 
 void MainWindow::update_patientSearchTableView(){
+    PatientDAO * patientDAO = new PatientDAO();
     QStringList listeNom;
     listeNom << "Nom" << "Prenom" << "Adresse" << "Ville" << "Code Postal" << "Durée de consultation"
-             << "Jour de consultation" << "Priorité" << "Ressources";
-    QStandardItemModel * standardItemModel = new QStandardItemModel(0,9,0);
+             << "Jour de consultation" << "Priorité";
+    QStandardItemModel * standardItemModel = new QStandardItemModel(patientDAO->getNumberOfPatient(),8);
     standardItemModel->setHorizontalHeaderLabels(listeNom);
+    for (int row = 1; row < patientDAO->getNumberOfPatient()+1; ++row) {
+        Patient * patient = patientDAO->getPatientById(row);
+        standardItemModel->setItem(row-1, 0, new QStandardItem(patient->getName()));
+        standardItemModel->setItem(row-1, 1, new QStandardItem(patient->getFirstName()));
+        standardItemModel->setItem(row-1, 2, new QStandardItem(patient->getAddress()));
+        standardItemModel->setItem(row-1, 3, new QStandardItem(patient->getCity()));
+        standardItemModel->setItem(row-1, 4, new QStandardItem(patient->getZipCode()));
+        standardItemModel->setItem(row-1, 5, new QStandardItem(QString::number(patient->getConsultTime())));
+        standardItemModel->setItem(row-1, 6, new QStandardItem(patient->getConsultDate().toString()));
+        standardItemModel->setItem(row-1, 7, new QStandardItem(QString::number(patient->getPriority())));
+    }
+
     this->ui->patientSearchTableView->setModel(standardItemModel);
 }
 

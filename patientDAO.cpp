@@ -25,16 +25,25 @@ void PatientDAO::addPatient(int id, QString name, QString firstName, QString add
            ", 'Dépressif' AS 'Commentaire', '247558963' AS 'Commentaire', '2013-06-01' AS 'DateConsultation', '90' AS 'DureeConsultation', '2' AS 'Priorite'");
 }
 
-Patient PatientDAO::getPatientById(int id){
-    q.exec("SELECT Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateConsultation, DureeConsultation, Priorite FROM TPatient WHERE Id = "+id+"");
+Patient* PatientDAO::getPatientById(int id){
+    QString idQString = QString::number(id);
+    q.exec("SELECT Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateConsultation, DureeConsultation, Priorite FROM TPatient WHERE Id = "+idQString+"");
     while (q.next()) {
-            patient p = new patient(q.value(0).toString().toStdString(), q.value(1).toString().toStdString(), q.value(2).toString().toStdString(),
-                                    q.value(3).toString().toStdString(), q.value(4).toString().toStdString(), q.value(5).toString().toStdString(),
-                                    q.value(6).toString().toStdString(), q.value(7).toString().toStdString(), q.value(8).toString().toStdString(),
-                                    q.value(9).toString().toStdString());
+            Patient * p = new Patient(id, q.value(0).toString(), q.value(1).toString(), q.value(2).toString(),
+                                    q.value(3).toString(), q.value(4).toString(), q.value(5).toString(),
+                                    q.value(6).toInt(), q.value(7).toDate(), q.value(8).toInt(),
+                                    q.value(9).toInt());
             return p;
         }
-    return null;
+    return NULL;
+}
+
+int PatientDAO::getNumberOfPatient(){
+    q.exec("SELECT count(*) FROM TPatient");
+    while (q.next()) {
+            return q.value(0).toInt();
+        }
+    return 0;
 }
 
 void PatientDAO::printPatients(){

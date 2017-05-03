@@ -15,9 +15,10 @@ public:
     ~PatientDAO();
 
     void addPatient(int id, QString name, QString firstName, QString address, QString city, QString zipCode, QString comment, int phoneNumber, QDate consultDate, int consultTime, int priority);
-    Patient getPatientById(int id);
+    Patient* getPatientById(int id);
     void deletePatientById(int id);
     void deletePatientByName(QString name, QString fistName);
+    int getNumberOfPatient();
     void printPatients();
 
 private:

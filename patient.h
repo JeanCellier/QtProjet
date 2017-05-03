@@ -4,37 +4,42 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <QString>
+#include <QDate>
 
 using namespace std;
 
 class Patient
 {
 private :
-    string sFirstName;
-    string sLastName;
-    string sAddress;
-    string sCity;
-    string sComments;
+    int id;
+    QString name;
+    QString firstName;
+    QString address;
+    QString city;
+    QString zipCode;
+    QString comment;
 
-    int iPhoneNumber;
-    int iPostalCode;
-    int iConsultationEstimatedTime;
-    int iPriority;
-
-    vector<int> viIdRessources;
+    int phoneNumber;
+    QDate consultDate;
+    int consultTime;
+    int priority;
 
 public :
-    Patient(string firstName, string lastName, string address, string city,
-        string comments, int phoneNumber, int postalCode,
-        int consultationEstimatedTime, int priority);
+    Patient(int id, QString name, QString firstName, QString address, QString city, QString zipCode,
+            QString comment, int phoneNumber, QDate consultDate, int consultTime, int priority);
+    int getId();
+    QString getFirstName();
+    QString getName();
+    QString getAddress();
+    QString getCity();
+    QString getZipCode();
+    QString getComment();
 
-    string GetFirstName();
-
-    string GetLastName();
-
-    int GetPriority();
-
-    int GetConsultationEstimatedTime();
+    int getPhoneNumber();
+    QDate getConsultDate();
+    int getConsultTime();
+    int getPriority();
 };
 
 #endif // PATIENT_H

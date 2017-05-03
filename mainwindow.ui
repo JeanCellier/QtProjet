@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>497</width>
-    <height>438</height>
+    <width>1125</width>
+    <height>657</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,20 +19,20 @@
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>441</width>
-      <height>341</height>
+      <width>1091</width>
+      <height>561</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="patientSearch">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>441</width>
-       <height>279</height>
+       <width>1091</width>
+       <height>499</height>
       </rect>
      </property>
      <attribute name="label">
@@ -43,8 +43,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>431</width>
-        <height>271</height>
+        <width>1091</width>
+        <height>501</height>
        </rect>
       </property>
      </widget>
@@ -54,8 +54,8 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>441</width>
-       <height>279</height>
+       <width>1091</width>
+       <height>499</height>
       </rect>
      </property>
      <attribute name="label">
@@ -66,8 +66,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>441</width>
-        <height>271</height>
+        <width>1091</width>
+        <height>491</height>
        </rect>
       </property>
      </widget>
@@ -79,7 +79,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>497</width>
+     <width>1125</width>
      <height>26</height>
     </rect>
    </property>
