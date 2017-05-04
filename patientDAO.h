@@ -2,6 +2,7 @@
 #define PATIENTDAO_H
 #include <QString>
 #include <QDate>
+#include "BdHandler.h"
 #include <QSqlQuery>
 #include "Patient.h"
 
@@ -9,6 +10,7 @@ class PatientDAO
 {
 
 private:
+    Bdhandler handler;
     QSqlQuery q;
 public:
     PatientDAO();
@@ -19,7 +21,6 @@ public:
     void deletePatientById(int id);
     void deletePatientByName(QString name, QString fistName);
     int getNumberOfPatient();
-    void printPatients();
 
 private:
 };

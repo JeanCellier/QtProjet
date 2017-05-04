@@ -35,7 +35,9 @@ SOURCES += main.cpp\
     bdhandler.cpp \
     patient.cpp \
     ressource.cpp \
-    ressourceDAO.cpp
+    ressourceDAO.cpp \
+    typedao.cpp \
+    type.cpp
 
 HEADERS  += mainwindow.h \
     idwindow.h \
@@ -47,7 +49,9 @@ HEADERS  += mainwindow.h \
     bdhandler.h \
     patient.h \
     ressource.h \
-    ressourceDAO.h
+    ressourceDAO.h \
+    typedao.h \
+    type.h
 
 FORMS    += mainwindow.ui \
     idwindow.ui \

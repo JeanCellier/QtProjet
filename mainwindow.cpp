@@ -6,6 +6,8 @@
 #include "QStandardItemModel"
 #include "QFileSystemModel"
 #include "patientDAO.h"
+#include "ressourceDAO.h"
+#include "typeDAO.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -98,34 +100,25 @@ void MainWindow::update_patientSearchTableView(){
 void MainWindow::update_ressourceTreeView()
 {
     QStandardItemModel * standardModel = new QStandardItemModel();
-    QStandardItem *rootNode = standardModel->invisibleRootItem();
-
-
-    //defining a couple of items
-    QStandardItem *doctorAItem = new QStandardItem("Docteur A");
-    QStandardItem *doctorBItem = new QStandardItem("Docteur B");
-    QStandardItem *radioItem = new QStandardItem("Radiologue");
-    QStandardItem *nurseItem = new QStandardItem("Infirmiere");
-    QStandardItem *kineItem = new QStandardItem("Kinesitherapeute");
-    QStandardItem *psyItem = new QStandardItem("Psychologue");
-
-    QStandardItem *jeanItem = new QStandardItem("Jean");
-    QStandardItem *pierreItem = new QStandardItem("Pierre");
-
-    //building up the hierarchy
-    rootNode-> appendRow(doctorAItem);
-    rootNode-> appendRow(doctorBItem);
-    rootNode-> appendRow(radioItem);
-    rootNode-> appendRow(nurseItem);
-    rootNode-> appendRow(kineItem);
-    rootNode-> appendRow(psyItem);
-
-    doctorAItem -> appendRow(jeanItem);
-    psyItem -> appendRow(pierreItem);
-
-    //register the model
-    this->ui->ressourceTreeView->setModel(standardModel);
-    this->ui->ressourceTreeView->expandAll();
+        QStandardItem *rootNode = standardModel->invisibleRootItem();
+        TypeDAO * typeDAO = new TypeDAO();
+        RessourceDAO * ressourceDAO = new RessourceDAO();
+        for(int parent = 1; parent < typeDAO->getNumberOfType()+1; ++parent)
+        //defining a couple of items
+        {
+            Type* type = typeDAO->getTypeById(parent);
+            QStandardItem *standardParent = new QStandardItem(type->getLabel());
+            rootNode-> appendRow(standardParent);
+            vector<Ressource*> ressources = ressourceDAO->getRessourcesByIdType(parent);
+            for (int row = 0; row < ressources.size(); row++) {
+                    Ressource * ressource = ressources[row];
+                    QStandardItem *standardRessource = new QStandardItem(ressource->getFirstName()+" "+ressource->getName());
+                    standardParent-> appendRow(standardRessource);
+                }
+        }
+        //register the model
+        this->ui->ressourceTreeView->setModel(standardModel);
+        this->ui->ressourceTreeView->expandAll();
 }
 
 void MainWindow::on_toolBox_currentChanged(int index)
