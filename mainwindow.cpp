@@ -82,8 +82,9 @@ void MainWindow::update_patientSearchTableView(){
              << "Jour de consultation" << "Priorité";
     QStandardItemModel * standardItemModel = new QStandardItemModel(patientDAO->getNumberOfPatient(),8);
     standardItemModel->setHorizontalHeaderLabels(listeNom);
-    for (int row = 1; row < patientDAO->getNumberOfPatient()+1; ++row) {
+    for (int row = 1; row < patientDAO->getMaxPatientId()+1; ++row) {
         Patient * patient = patientDAO->getPatientById(row);
+        if(patient != NULL){
         standardItemModel->setItem(row-1, 0, new QStandardItem(patient->getName()));
         standardItemModel->setItem(row-1, 1, new QStandardItem(patient->getFirstName()));
         standardItemModel->setItem(row-1, 2, new QStandardItem(patient->getAddress()));
@@ -92,6 +93,7 @@ void MainWindow::update_patientSearchTableView(){
         standardItemModel->setItem(row-1, 5, new QStandardItem(QString::number(patient->getConsultTime())));
         standardItemModel->setItem(row-1, 6, new QStandardItem(patient->getConsultDate().toString()));
         standardItemModel->setItem(row-1, 7, new QStandardItem(QString::number(patient->getPriority())));
+        }
     }
 
     this->ui->patientSearchTableView->setModel(standardItemModel);
@@ -103,10 +105,11 @@ void MainWindow::update_ressourceTreeView()
         QStandardItem *rootNode = standardModel->invisibleRootItem();
         TypeDAO * typeDAO = new TypeDAO();
         RessourceDAO * ressourceDAO = new RessourceDAO();
-        for(int parent = 1; parent < typeDAO->getNumberOfType()+1; ++parent)
+        for(int parent = 1; parent < typeDAO->getMaxTypeId()+1; ++parent)
         //defining a couple of items
         {
             Type* type = typeDAO->getTypeById(parent);
+            if(type != NULL){
             QStandardItem *standardParent = new QStandardItem(type->getLabel());
             rootNode-> appendRow(standardParent);
             vector<Ressource*> ressources = ressourceDAO->getRessourcesByIdType(parent);
@@ -115,6 +118,7 @@ void MainWindow::update_ressourceTreeView()
                     QStandardItem *standardRessource = new QStandardItem(ressource->getFirstName()+" "+ressource->getName());
                     standardParent-> appendRow(standardRessource);
                 }
+            }
         }
         //register the model
         this->ui->ressourceTreeView->setModel(standardModel);

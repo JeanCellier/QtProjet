@@ -66,3 +66,15 @@ int RessourceDAO::getNumberOfRessource(){
     handler.closeBD();
     return 0;
 }
+
+int RessourceDAO::getMaxRessourceId(){
+    this->q = handler.openBD();
+    q.exec("SELECT max(id) FROM TRessource");
+    while (q.next()) {
+            int maxRessourceId = q.value(0).toInt();
+            handler.closeBD();
+            return maxRessourceId;
+        }
+    handler.closeBD();
+    return 0;
+}

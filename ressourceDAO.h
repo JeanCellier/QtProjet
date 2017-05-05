@@ -23,7 +23,7 @@ public:
     void deleteRessourceByName(QString name, QString fistName);
     int getNumberOfRessourceByIdType(int idType);
     int getNumberOfRessource();
-    void printRessource();
+    int getMaxRessourceId();
 
 };
 

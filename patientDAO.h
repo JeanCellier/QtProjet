@@ -21,6 +21,7 @@ public:
     void deletePatientById(int id);
     void deletePatientByName(QString name, QString fistName);
     int getNumberOfPatient();
+    int getMaxPatientId();
 
 private:
 };

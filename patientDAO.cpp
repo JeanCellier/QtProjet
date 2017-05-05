@@ -48,5 +48,17 @@ int PatientDAO::getNumberOfPatient(){
         }
     handler.closeBD();
     return 0;
-
 }
+
+int PatientDAO::getMaxPatientId(){
+    this->q = handler.openBD();
+    q.exec("SELECT max(id) FROM TPatient");
+    while (q.next()) {
+            int maxPatientId = q.value(0).toInt();
+            handler.closeBD();
+            return maxPatientId;
+        }
+    handler.closeBD();
+    return 0;
+}
+

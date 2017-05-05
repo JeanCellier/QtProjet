@@ -40,3 +40,15 @@ int TypeDAO::getNumberOfType(){
     handler.closeBD();
     return 0;
 }
+
+int TypeDAO::getMaxTypeId(){
+    this->q = handler.openBD();
+    q.exec("SELECT max(id) FROM TType");
+    while (q.next()) {
+            int maxTypeId = q.value(0).toInt();
+            handler.closeBD();
+            return maxTypeId;
+        }
+    handler.closeBD();
+    return 0;
+}

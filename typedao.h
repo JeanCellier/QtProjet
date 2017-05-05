@@ -19,6 +19,8 @@ public:
     Type* getTypeById(int id);
     void deleteTypeById(int id);
     int getNumberOfType();
+    int getMaxTypeId();
+
 };
 
 #endif // TYPEDAO_H

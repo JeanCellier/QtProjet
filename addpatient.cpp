@@ -4,12 +4,19 @@
 #include <stdio.h>
 #include <iostream>
 #include <algorithm>
+#include "ressourceDAO.h"
 
 addPatient::addPatient(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::addPatient)
 {
     ui->setupUi(this);
+    RessourceDAO* ressourceDAO = new RessourceDAO();
+    for(int row = 1; row < ressourceDAO->getMaxRessourceId()+1; row++){
+        Ressource* ressource = ressourceDAO->getRessourceById(row);
+        if (ressource != NULL)
+        ui->ressourcesComboBox->addItem(ressource->getFirstName()+" "+ressource->getName());
+    }
 }
 
 addPatient::~addPatient()
