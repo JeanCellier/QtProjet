@@ -6,6 +6,8 @@
 #include <algorithm>
 #include "ressourceDAO.h"
 
+using namespace std;
+
 addPatient::addPatient(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::addPatient)
@@ -66,4 +68,12 @@ void addPatient::on_cancelButton_clicked()
 void addPatient::on_calendar_selectionChanged()
 {
     this->ui->dayLineEdit->setText(this->ui->calendar->selectedDate().toString());
+}
+
+void addPatient::on_addRessourceButton_clicked()
+{
+    /*
+    this->ressources.push_back(ui->ressourcesComboBox->itemData(ui->ressourcesComboBox->currentIndex()));
+    ui->ressourcesList->text() += ", "+ui->ressourcesComboBox->itemData(ui->ressourcesComboBox->currentIndex());
+*/
 }

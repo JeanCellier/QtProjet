@@ -2,6 +2,9 @@
 #define ADDPATIENT_H
 
 #include <QDialog>
+#include "ressource.h"
+
+using namespace std;
 
 namespace Ui {
 class addPatient;
@@ -22,8 +25,11 @@ private slots:
 
     void on_calendar_selectionChanged();
 
+    void on_addRessourceButton_clicked();
+
 private:
     Ui::addPatient *ui;
+    vector<int> ressourcesId;
 };
 
 #endif // ADDPATIENT_H
