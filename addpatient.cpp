@@ -72,8 +72,10 @@ void addPatient::on_calendar_selectionChanged()
 
 void addPatient::on_addRessourceButton_clicked()
 {
-    /*
-    this->ressources.push_back(ui->ressourcesComboBox->itemData(ui->ressourcesComboBox->currentIndex()));
-    ui->ressourcesList->text() += ", "+ui->ressourcesComboBox->itemData(ui->ressourcesComboBox->currentIndex());
-*/
+    RessourceDAO ressourceDAO;
+    QStringList list = ui->ressourcesComboBox->currentText().split(' ');
+    this->ressources.push_back(ressourceDAO.getRessourceByName(list[0],list[1]));
+    if (ui->ressourcesList->text() != "")
+    ui->ressourcesList->setText(ui->ressourcesList->text()+", "+ui->ressourcesComboBox->currentText());
+    else ui->ressourcesList->setText(ui->ressourcesComboBox->currentText());
 }

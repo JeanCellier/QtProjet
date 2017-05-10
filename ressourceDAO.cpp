@@ -31,6 +31,18 @@ Ressource* RessourceDAO::getRessourceById(int id){
     return NULL;
 }
 
+Ressource* RessourceDAO::getRessourceByName(QString name, QString firstName){
+    this->q = handler.openBD();
+    q.exec("SELECT Id, IdType FROM TRessource WHERE Nom = '"+name+"' AND Prenom = '"+firstName+"'");
+    while (q.next()) {
+            Ressource* r = new Ressource(q.value(0).toInt(), name, firstName, q.value(1).toInt());
+            handler.closeBD();
+            return r;
+        }
+    handler.closeBD();
+    return NULL;
+}
+
 vector<Ressource*> RessourceDAO::getRessourcesByIdType(int idType){
     this->q = handler.openBD();
     vector<Ressource*> vecRessource;
