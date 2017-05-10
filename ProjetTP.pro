@@ -39,7 +39,8 @@ SOURCES += main.cpp\
     type.cpp \
     compte.cpp \
     consult.cpp \
-    typeDAO.cpp
+    typeDAO.cpp \
+    compteDAO.cpp
 
 HEADERS  += mainwindow.h \
     idwindow.h \
@@ -55,7 +56,8 @@ HEADERS  += mainwindow.h \
     type.h \
     compte.h \
     consult.h \
-    typeDAO.h
+    typeDAO.h \
+    compteDAO.h
 
 FORMS    += mainwindow.ui \
     idwindow.ui \

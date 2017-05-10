@@ -2,6 +2,7 @@
 #include "ui_idwindow.h"
 #include <QMessageBox>
 #include <c_init_bd.h>
+#include "compteDAO.h"
 
 IdWindow::IdWindow(QWidget *parent) :
     QDialog(parent),
@@ -18,7 +19,7 @@ IdWindow::~IdWindow()
 
 void IdWindow::on_cancelButton_clicked()
 {
-
+    reject();
 }
 
 void IdWindow::on_connectButton_clicked()
@@ -33,8 +34,18 @@ void IdWindow::on_connectButton_clicked()
 }
 
 bool IdWindow::isIdValid(){
+    CompteDAO * compteDAO = new CompteDAO();
     if(ui->loginLineEdit->text().size() != 0 && ui->passwordLineEdit->text().size() != 0){
-       return true;
+        Compte * compte = compteDAO->getCompteByLogin(this->ui->loginLineEdit->text());
+        if(compte == NULL){
+                return false;
+        }else{
+            if(compte->getMdp() == this->ui->passwordLineEdit->text()){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }else{
         return false;
     }
