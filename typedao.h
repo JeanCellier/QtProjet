@@ -20,6 +20,7 @@ public:
     void deleteTypeById(int id);
     int getNumberOfType();
     int getMaxTypeId();
+    int getTypeIdByName(QString label);
 
 };
 

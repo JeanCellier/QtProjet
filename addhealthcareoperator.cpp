@@ -1,5 +1,7 @@
 #include "addhealthcareoperator.h"
 #include "ui_addhealthcareoperator.h"
+#include "typeDAO.h"
+#include "ressourceDAO.h"
 
 addHealthcareOperator::addHealthcareOperator(QWidget *parent) :
     QDialog(parent),
@@ -37,4 +39,17 @@ void addHealthcareOperator::on_typeBox_currentTextChanged(const QString &arg1)
 void addHealthcareOperator::on_cancelButton_clicked()
 {
     reject();
+}
+
+void addHealthcareOperator::on_addButton_clicked()
+{
+    if(this->ui->typeBox->currentText() == "Informaticien"){
+
+    }else{
+        TypeDAO * typeDAO = new TypeDAO();
+        RessourceDAO * ressourceDAO = new RessourceDAO();
+        int idType = typeDAO->getTypeIdByName(this->ui->typeBox->currentText());
+        ressourceDAO->addRessource(ressourceDAO->getMaxRessourceId()+1, this->ui->nameLineEdit->text(), this->ui->firstNameLineEdit->text(), idType);
+        accept();
+    }
 }

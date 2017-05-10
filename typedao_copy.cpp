@@ -1,4 +1,4 @@
-#include "typeDAO.h"
+#include "typedao.h"
 
 using namespace std;
 
@@ -13,7 +13,7 @@ TypeDAO::~TypeDAO()
 void TypeDAO::addType(int id, QString label){
     this->q = handler.openBD();
     q.exec("INSERT INTO TType "
-           "SELECT '"+QString::number(id)+"' AS 'Id', "+label+" AS 'Label'");
+           "SELECT '"+QString::number(id)+"' AS 'Id', "+label+" AS 'IdType'");
     handler.closeBD();
 }
 
@@ -48,18 +48,6 @@ int TypeDAO::getMaxTypeId(){
             int maxTypeId = q.value(0).toInt();
             handler.closeBD();
             return maxTypeId;
-        }
-    handler.closeBD();
-    return 0;
-}
-
-int TypeDAO::getTypeIdByName(QString label){
-    this->q = handler.openBD();
-    q.exec("SELECT id FROM TType WHERE Label='"+label+"'");
-    while (q.next()) {
-            int typeId = q.value(0).toInt();
-            handler.closeBD();
-            return typeId;
         }
     handler.closeBD();
     return 0;
