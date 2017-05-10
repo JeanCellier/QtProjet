@@ -32,7 +32,14 @@ SOURCES += main.cpp\
     about.cpp \
     c_init_bd.cpp \
     patientDAO.cpp \
-    bdhandler.cpp
+    bdhandler.cpp \
+    patient.cpp \
+    ressource.cpp \
+    ressourceDAO.cpp \
+    typedao.cpp \
+    type.cpp \
+    compte.cpp \
+    consult.cpp
 
 HEADERS  += mainwindow.h \
     idwindow.h \
@@ -41,7 +48,14 @@ HEADERS  += mainwindow.h \
     about.h \
     c_init_bd.h \
     patientDAO.h \
-    bdhandler.h
+    bdhandler.h \
+    patient.h \
+    ressource.h \
+    ressourceDAO.h \
+    typedao.h \
+    type.h \
+    compte.h \
+    consult.h
 
 FORMS    += mainwindow.ui \
     idwindow.ui \

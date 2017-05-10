@@ -1,23 +1,29 @@
-#ifndef PATIENT_H
-#define PATIENT_H
+#ifndef PATIENTDAO_H
+#define PATIENTDAO_H
 #include <QString>
 #include <QDate>
+#include "BdHandler.h"
 #include <QSqlQuery>
+#include "Patient.h"
 
-class patientDAO
+class PatientDAO
 {
 
 private:
+    Bdhandler handler;
     QSqlQuery q;
 public:
-    patientDAO();
-    ~patientDAO();
+    PatientDAO();
+    ~PatientDAO();
 
     void addPatient(int id, QString name, QString firstName, QString address, QString city, QString zipCode, QString comment, int phoneNumber, QDate consultDate, int consultTime, int priority);
+    Patient* getPatientById(int id);
     void deletePatientById(int id);
     void deletePatientByName(QString name, QString fistName);
+    int getNumberOfPatient();
+    int getMaxPatientId();
 
 private:
 };
 
-#endif // PATIENT_H
+#endif // PATIENTDAO_H

@@ -28,6 +28,10 @@ private slots:
 
     void on_actionAjouterPersonnelSoins_triggered();
 
+    void update_patientSearchTableView();
+
+    void update_ressourceTreeView();
+
     void on_toolBox_currentChanged(int index);
 
 private:
