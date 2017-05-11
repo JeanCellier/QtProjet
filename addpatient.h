@@ -2,7 +2,7 @@
 #define ADDPATIENT_H
 
 #include <QDialog>
-#include "ressource.h"
+#include "ressourceDAO.h"
 
 using namespace std;
 
@@ -29,7 +29,7 @@ private slots:
 
 private:
     Ui::addPatient *ui;
-    vector<int> ressourcesId;
+    vector<Ressource *> ressources;
 };
 
 #endif // ADDPATIENT_H
