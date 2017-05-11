@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <patientDAO.h>
+
+using namespace std;
 
 namespace Ui {
 class MainWindow;
@@ -32,7 +35,11 @@ private slots:
 
     void update_ressourceTreeView();
 
+    void search_patientSearchTableView(vector<Patient*> vecPatient);
+
     void on_toolBox_currentChanged(int index);
+
+    void on_searchButton_clicked();
 
 private:
     Ui::MainWindow *ui;

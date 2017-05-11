@@ -18,8 +18,27 @@ void PatientDAO::addPatient(int id, QString name, QString firstName, QString add
     this->q = handler.openBD();
     q.exec("INSERT INTO TPatient "
            "SELECT '" +QString::number(id)+"' AS 'Id', '"+name+"' AS 'Nom', '"+firstName+"' AS 'Prenom', '"+address+"' AS 'Adresse', '"+city+"' AS 'Ville', '"+zipCode+"' AS 'CP'"
-           ", '"+comment+"' AS 'Commentaire', '"+QString::number(phoneNumber)+"' AS 'Tel', '"+consultDate.toString("yyyy.dd.MM")+"' AS 'DateConsultation', '"+QString::number(consultTime)+"' AS 'DureeConsultation', '"+QString::number(priority)+"' AS 'Priorite'");
+           ", '"+comment+"' AS 'Commentaire', '"+QString::number(phoneNumber)+"' AS 'Tel', '"+consultDate.toString("yyyy-MM-dd")+"' AS 'DateConsultation', '"+QString::number(consultTime)+"' AS 'DureeConsultation', '"+QString::number(priority)+"' AS 'Priorite'");
     handler.closeBD();
+}
+
+vector<Patient*> PatientDAO::getPatientsByValues(int id, QString name, QString firstName, QDate startConsultDate, QDate endConsultDate){
+    this->q = handler.openBD();
+    vector<Patient*> vecPatient;
+    QString sqlCommand = "SELECT Id, Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateConsultation, DureeConsultation, Priorite FROM TPatient WHERE Nom LIKE '"+name+"%' AND Prenom LIKE '"+firstName+"%'";
+    //if (QString::number(id) != "") sqlCommand += " AND Id = "+QString::number(id);
+    //if (startConsultDate.toString("yyyy-MM-dd") != "") sqlCommand += " AND DateConsultation >= "+startConsultDate.toString("yyyy-MM-dd");
+    //if (endConsultDate.toString("yyyy-MM-dd") != "") sqlCommand += " AND DateConsultation <= "+endConsultDate.toString("yyyy-MM-dd");
+    q.exec(sqlCommand);
+    while (q.next()) {
+            Patient * p = new Patient(q.value(0).toInt(), q.value(1).toString(), q.value(2).toString(),
+                                    q.value(3).toString(), q.value(4).toString(), q.value(5).toString(),
+                                    q.value(6).toString(), q.value(7).toInt(), q.value(8).toDate(),
+                                    q.value(9).toInt(),q.value(10).toInt());
+            vecPatient.push_back(p);
+        }
+    handler.closeBD();
+    return vecPatient;
 }
 
 Patient* PatientDAO::getPatientById(int id){

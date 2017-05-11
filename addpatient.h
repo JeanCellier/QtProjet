@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include "ressourceDAO.h"
+#include "patientDAO.h"
+#include "consultdao.h"
 
 using namespace std;
 

@@ -23,7 +23,5 @@ public:
     void deleteCompte0ByRessource(int idRessource);
     int getNumberOfCompte();
     int getMaxCompteId();
-
-private:
 };
 #endif // COMPTEDAO_H

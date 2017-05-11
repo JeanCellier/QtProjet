@@ -35,6 +35,7 @@ void MainWindow::on_actionPatient_triggered()
     if(addingPatient.exec()==QDialog::Accepted)
     {
         addingPatient.reject();
+        update_patientSearchTableView();
         this->statusBar()->showMessage("Vous venez d'ajouter un patient");
     }
 }
@@ -45,6 +46,7 @@ void MainWindow::on_actionPersonnels_de_soins_triggered()
     if(addingHealthcareOperator.exec()==QDialog::Accepted)
     {
         addingHealthcareOperator.reject();
+        update_ressourceTreeView();
         this->statusBar()->showMessage("Vous venez d'ajouter un personnel de soin");
     }
 }
@@ -61,7 +63,9 @@ void MainWindow::on_actionAjouterPatient_triggered()
     if(addingPatient.exec()==QDialog::Accepted)
     {
         addingPatient.reject();
+        update_patientSearchTableView();
         this->statusBar()->showMessage("Vous venez d'ajouter un patient");
+
     }
 }
 
@@ -71,6 +75,7 @@ void MainWindow::on_actionAjouterPersonnelSoins_triggered()
     if(addingHealthcareOperator.exec()==QDialog::Accepted)
     {
         addingHealthcareOperator.reject();
+        update_ressourceTreeView();
         this->statusBar()->showMessage("Vous venez d'ajouter un personnel de soin");
     }
 }
@@ -133,4 +138,37 @@ void MainWindow::on_toolBox_currentChanged(int index)
     if (index==1){
         update_ressourceTreeView();
     }
+}
+
+void MainWindow::search_patientSearchTableView(vector<Patient*> vecPatient)
+{
+    QStringList listeNom;
+    listeNom << "Nom" << "Prenom" << "Adresse" << "Ville" << "Code Postal" << "Durée de consultation"
+             << "Jour de consultation" << "Priorité";
+    QStandardItemModel * standardItemModel = new QStandardItemModel(vecPatient.size(),8);
+    standardItemModel->setHorizontalHeaderLabels(listeNom);
+    for (int row = 0; row < vecPatient.size(); ++row) {
+        Patient * patient = vecPatient[row];
+        if(patient != NULL){
+        standardItemModel->setItem(row, 0, new QStandardItem(patient->getName()));
+        standardItemModel->setItem(row, 1, new QStandardItem(patient->getFirstName()));
+        standardItemModel->setItem(row, 2, new QStandardItem(patient->getAddress()));
+        standardItemModel->setItem(row, 3, new QStandardItem(patient->getCity()));
+        standardItemModel->setItem(row, 4, new QStandardItem(patient->getZipCode()));
+        standardItemModel->setItem(row, 5, new QStandardItem(QString::number(patient->getConsultTime())));
+        standardItemModel->setItem(row, 6, new QStandardItem(patient->getConsultDate().toString()));
+        standardItemModel->setItem(row, 7, new QStandardItem(QString::number(patient->getPriority())));
+        }
+    }
+    this->ui->patientSearchTableView->setModel(standardItemModel);
+}
+
+void MainWindow::on_searchButton_clicked()
+{
+    PatientDAO* patientDAO = new PatientDAO();
+    vector<Patient*> vecPatient = patientDAO->getPatientsByValues(this->ui->lineEdit->text().toInt(),
+                                    this->ui->nameSearchLineEdit->text(),this->ui->prenomSearchLineEdit->text(),
+                                    this->ui->calendarWidget->selectedDate(),this->ui->calendarWidget_2->selectedDate());
+
+    search_patientSearchTableView(vecPatient);
 }
