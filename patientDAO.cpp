@@ -26,7 +26,7 @@ vector<Patient*> PatientDAO::getPatientsByValues(int id, QString name, QString f
     this->q = handler.openBD();
     vector<Patient*> vecPatient;
     QString sqlCommand = "SELECT Id, Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateConsultation, DureeConsultation, Priorite FROM TPatient WHERE Nom LIKE '"+name+"%' AND Prenom LIKE '"+firstName+"%'";
-    //if (QString::number(id) != "") sqlCommand += " AND Id = "+QString::number(id);
+    if (id != 0) sqlCommand += " AND Id = '"+QString::number(id)+"'";
     //if (startConsultDate.toString("yyyy-MM-dd") != "") sqlCommand += " AND DateConsultation >= "+startConsultDate.toString("yyyy-MM-dd");
     //if (endConsultDate.toString("yyyy-MM-dd") != "") sqlCommand += " AND DateConsultation <= "+endConsultDate.toString("yyyy-MM-dd");
     q.exec(sqlCommand);
