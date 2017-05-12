@@ -82,6 +82,7 @@ void MainWindow::on_actionAjouterPersonnelSoins_triggered()
 
 void MainWindow::update_patientSearchTableView(){
     PatientDAO * patientDAO = new PatientDAO();
+    int rowShift = 1;
     QStringList listeNom;
     listeNom << "Nom" << "Prenom" << "Adresse" << "Ville" << "Code Postal" << "Durée de consultation"
              << "Jour de consultation" << "Priorité";
@@ -90,15 +91,16 @@ void MainWindow::update_patientSearchTableView(){
     for (int row = 1; row < patientDAO->getMaxPatientId()+1; ++row) {
         Patient * patient = patientDAO->getPatientById(row);
         if(patient != NULL){
-        standardItemModel->setItem(row-1, 0, new QStandardItem(patient->getName()));
-        standardItemModel->setItem(row-1, 1, new QStandardItem(patient->getFirstName()));
-        standardItemModel->setItem(row-1, 2, new QStandardItem(patient->getAddress()));
-        standardItemModel->setItem(row-1, 3, new QStandardItem(patient->getCity()));
-        standardItemModel->setItem(row-1, 4, new QStandardItem(patient->getZipCode()));
-        standardItemModel->setItem(row-1, 5, new QStandardItem(QString::number(patient->getConsultTime())));
-        standardItemModel->setItem(row-1, 6, new QStandardItem(patient->getConsultDate().toString()));
-        standardItemModel->setItem(row-1, 7, new QStandardItem(QString::number(patient->getPriority())));
+        standardItemModel->setItem(row-rowShift, 0, new QStandardItem(patient->getName()));
+        standardItemModel->setItem(row-rowShift, 1, new QStandardItem(patient->getFirstName()));
+        standardItemModel->setItem(row-rowShift, 2, new QStandardItem(patient->getAddress()));
+        standardItemModel->setItem(row-rowShift, 3, new QStandardItem(patient->getCity()));
+        standardItemModel->setItem(row-rowShift, 4, new QStandardItem(patient->getZipCode()));
+        standardItemModel->setItem(row-rowShift, 5, new QStandardItem(QString::number(patient->getConsultTime())));
+        standardItemModel->setItem(row-rowShift, 6, new QStandardItem(patient->getConsultDate().toString()));
+        standardItemModel->setItem(row-rowShift, 7, new QStandardItem(QString::number(patient->getPriority())));
         }
+        else rowShift += 1;
     }
 
     this->ui->patientSearchTableView->setModel(standardItemModel);

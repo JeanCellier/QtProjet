@@ -43,7 +43,7 @@ p, li { white-space: pre-wrap; }
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>polytech.png</pixmap>
+    <pixmap resource="polytech.qrc">:/polytech.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -76,6 +76,8 @@ p, li { white-space: pre-wrap; }
   <zorder>textBrowser_2</zorder>
   <zorder>label</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="polytech.qrc"/>
+ </resources>
  <connections/>
 </ui>
