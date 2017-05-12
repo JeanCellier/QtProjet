@@ -28,8 +28,8 @@ vector<Patient*> PatientDAO::getPatientsByValues(int id, QString name, QString f
     vector<Patient*> vecPatient;
     QString sqlCommand = "SELECT Id, Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateConsultation, DureeConsultation, Priorite FROM TPatient WHERE Nom LIKE '"+name+"%' AND Prenom LIKE '"+firstName+"%'";
     if (id != 0) sqlCommand += " AND Id = '"+QString::number(id)+"'";
-    if (startConsultDate != "") sqlCommand += " AND DateConsultation >= "+startConsultDate;
-    if (endConsultDate != "") sqlCommand += " AND DateConsultation <= "+endConsultDate;
+    if (startConsultDate != "") sqlCommand += " AND DateConsultation >= '"+startConsultDate+"'";
+    if (endConsultDate != "") sqlCommand += " AND DateConsultation <= '"+endConsultDate+"'";
 
     q.exec(sqlCommand);
     while (q.next()) {
