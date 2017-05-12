@@ -57,7 +57,7 @@ void addPatient::on_createPatientButton_clicked()
         PatientDAO* patientDAO = new PatientDAO();
         ConsultDAO* consultDAO = new ConsultDAO();
         int newPatientId = patientDAO->getMaxPatientId()+1;
-        QDate date = QDate::fromString(this->ui->dayLineEdit->text(),"yyyy-mm-dd");
+        QDate date = QDate::fromString(this->ui->dayLineEdit->text(),"yyyy-MM-dd");
 
         patientDAO->addPatient(newPatientId,this->ui->nameLineEdit->text(),
             this->ui->fistNameLineEdit->text(),this->ui->addressLineEdit->text(),this->ui->cityLineEdit->text(),

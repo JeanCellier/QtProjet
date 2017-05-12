@@ -16,6 +16,7 @@ PatientDAO::~PatientDAO()
 
 void PatientDAO::addPatient(int id, QString name, QString firstName, QString address, QString city, QString zipCode, QString comment, int phoneNumber, QDate consultDate, int consultTime, int priority){
     this->q = handler.openBD();
+    if (comment == NULL) comment = "";
     q.exec("INSERT INTO TPatient "
            "SELECT '" +QString::number(id)+"' AS 'Id', '"+name+"' AS 'Nom', '"+firstName+"' AS 'Prenom', '"+address+"' AS 'Adresse', '"+city+"' AS 'Ville', '"+zipCode+"' AS 'CP'"
            ", '"+comment+"' AS 'Commentaire', '"+QString::number(phoneNumber)+"' AS 'Tel', '"+consultDate.toString("yyyy-MM-dd")+"' AS 'DateConsultation', '"+QString::number(consultTime)+"' AS 'DureeConsultation', '"+QString::number(priority)+"' AS 'Priorite'");
@@ -81,3 +82,14 @@ int PatientDAO::getMaxPatientId(){
     return 0;
 }
 
+void PatientDAO::deletePatientById(int id){
+    this->q = handler.openBD();
+    q.exec("DELETE FROM TPatient WHERE Id = "+QString::number(id));
+    handler.closeBD();
+}
+
+void PatientDAO::deletePatientByName(QString name, QString firstName){
+    this->q = handler.openBD();
+    q.exec("DELETE FROM TPatient WHERE Nom = '"+name+"' AND Prenom = '"+firstName+"'");
+    handler.closeBD();
+}
