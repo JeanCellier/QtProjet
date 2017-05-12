@@ -41,6 +41,12 @@ private slots:
 
     void on_searchButton_clicked();
 
+    void on_calendarWidget_selectionChanged();
+
+    void on_dateDebutCalendar_selectionChanged();
+
+    void on_dateFinCalendar_selectionChanged();
+
 private:
     Ui::MainWindow *ui;
 };

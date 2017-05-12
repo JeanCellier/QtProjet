@@ -30,6 +30,9 @@
          <y>0</y>
          <width>1082</width>
          <height>625</height>
+         <y>-10</y>
+         <width>1090</width>
+         <height>551</height>
         </rect>
        </property>
        <attribute name="label">
@@ -79,19 +82,19 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QCalendarWidget" name="calendarWidget"/>
+           <widget class="QCalendarWidget" name="dateDebutCalendar"/>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="searchDateMaxLabel">
             <property name="text">
              <string>Et :</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
-           <widget class="QCalendarWidget" name="calendarWidget_2"/>
+          <item row="5" column="1">
+           <widget class="QCalendarWidget" name="dateFinCalendar"/>
           </item>
-          <item row="5" column="0">
+          <item row="7" column="0">
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -104,10 +107,50 @@
             </property>
            </spacer>
           </item>
-          <item row="5" column="1">
+          <item row="7" column="1">
            <widget class="QPushButton" name="searchButton">
             <property name="text">
              <string>Rechercher</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="dateDebutLineEdit">
+            <property name="readOnly">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="endDateLineEdit">
+            <property name="readOnly">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
