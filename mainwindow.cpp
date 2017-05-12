@@ -168,7 +168,18 @@ void MainWindow::on_searchButton_clicked()
     PatientDAO* patientDAO = new PatientDAO();
     vector<Patient*> vecPatient = patientDAO->getPatientsByValues(this->ui->lineEdit->text().toInt(),
                                     this->ui->nameSearchLineEdit->text(),this->ui->prenomSearchLineEdit->text(),
-                                    this->ui->calendarWidget->selectedDate(),this->ui->calendarWidget_2->selectedDate());
+                                    this->ui->dateDebutLineEdit->text(),this->ui->endDateLineEdit->text());
 
     search_patientSearchTableView(vecPatient);
+}
+
+
+void MainWindow::on_dateDebutCalendar_selectionChanged()
+{
+    this->ui->dateDebutLineEdit->setText(this->ui->dateDebutCalendar->selectedDate().toString("yyyy-MM-dd"));
+}
+
+void MainWindow::on_dateFinCalendar_selectionChanged()
+{
+    this->ui->endDateLineEdit->setText(this->ui->dateFinCalendar->selectedDate().toString("yyyy-MM-dd"));
 }
