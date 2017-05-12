@@ -21,7 +21,7 @@ public:
     Ressource* getRessourceByName(QString name, QString firstName);
     vector<Ressource*> getRessourcesByIdType(int idType);
     void deleteRessourceById(int id);
-    void deleteRessourceByName(QString name, QString fistName);
+    void deleteRessourceByName(QString name, QString firstName);
     int getNumberOfRessourceByIdType(int idType);
     int getNumberOfRessource();
     int getMaxRessourceId();
