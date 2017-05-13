@@ -43,6 +43,23 @@ vector<Patient*> PatientDAO::getPatientsByValues(int id, QString name, QString f
     return vecPatient;
 }
 
+vector<Patient*> PatientDAO::getAllPatients(){
+    this->q = handler.openBD();
+    vector<Patient*> vecPatient;
+    QString sqlCommand = "SELECT Id, Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateConsultation, DureeConsultation, Priorite FROM TPatient";
+
+    q.exec(sqlCommand);
+    while (q.next()) {
+            Patient * p = new Patient(q.value(0).toInt(), q.value(1).toString(), q.value(2).toString(),
+                                    q.value(3).toString(), q.value(4).toString(), q.value(5).toString(),
+                                    q.value(6).toString(), q.value(7).toInt(), q.value(8).toDate(),
+                                    q.value(9).toInt(),q.value(10).toInt());
+            vecPatient.push_back(p);
+        }
+    handler.closeBD();
+    return vecPatient;
+}
+
 Patient* PatientDAO::getPatientById(int id){
     this->q = handler.openBD();
     QString idQString = QString::number(id);
@@ -91,13 +108,13 @@ void PatientDAO::deletePatientById(int id){
 
 Patient* PatientDAO::getPatientByName(QString nom, QString prenom){
     this->q = handler.openBD();
-    QString idQString = QString::number(id);
-    q.exec("SELECT Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateConsultation, DureeConsultation, Priorite FROM TPatient WHERE Nom = '"+nom+"' AND Prenom = '"+prenom+"'");
+    //QString idQString = QString::number(id);
+    q.exec("SELECT Id, Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateConsultation, DureeConsultation, Priorite FROM TPatient WHERE Nom = '"+nom+"' AND Prenom = '"+prenom+"'");
     while (q.next()) {
-            Patient * p = new Patient(id, q.value(0).toString(), q.value(1).toString(), q.value(2).toString(),
-                                    q.value(3).toString(), q.value(4).toString(), q.value(5).toString(),
-                                    q.value(6).toInt(), q.value(7).toDate(), q.value(8).toInt(),
-                                    q.value(9).toInt());
+            Patient * p = new Patient(q.value(0).toInt(), q.value(1).toString(), q.value(2).toString(), q.value(3).toString(),
+                                    q.value(4).toString(), q.value(5).toString(), q.value(6).toString(),
+                                    q.value(7).toInt(), q.value(8).toDate(), q.value(9).toInt(),
+                                    q.value(10).toInt());
             handler.closeBD();
             return p;
         }

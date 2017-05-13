@@ -68,3 +68,6 @@ FORMS    += mainwindow.ui \
     about.ui
 
 DISTFILES +=
+
+RESOURCES += \
+    polytech.qrc

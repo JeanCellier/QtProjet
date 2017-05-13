@@ -71,7 +71,6 @@ void addPatient::on_createPatientButton_clicked()
         }
 
         //formater les champs majuscule/minuscule
-        // probleme String/QString
         accept();
     }
     //accept();
