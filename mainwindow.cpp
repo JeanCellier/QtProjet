@@ -183,3 +183,12 @@ void MainWindow::on_dateFinCalendar_selectionChanged()
 {
     this->ui->endDateLineEdit->setText(this->ui->dateFinCalendar->selectedDate().toString("yyyy-MM-dd"));
 }
+
+void MainWindow::on_supprimerButton_clicked()
+{
+    PatientDAO* patientDAO = new PatientDAO();
+    QItemSelectionModel * select = this->ui->patientSearchTableView->selectionModel();
+    select->selectedRows().at()
+
+    //Patient * patient = patientDAO->getPatientByName(select->selectedRows().at(0).row(), select->selectedRows().at(0));
+}

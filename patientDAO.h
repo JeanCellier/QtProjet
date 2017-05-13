@@ -18,6 +18,7 @@ public:
 
     void addPatient(int id, QString name, QString firstName, QString address, QString city, QString zipCode, QString comment, int phoneNumber, QDate consultDate, int consultTime, int priority);
     Patient* getPatientById(int id);
+    Patient* getPatientByName(QString nom, QString prenom);
     vector<Patient*> getPatientsByValues(int id, QString name, QString firstName, QString startConsultDate, QString endConsultDate);
     void deletePatientById(int id);
     void deletePatientByName(QString name, QString firstName);

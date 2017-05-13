@@ -47,6 +47,8 @@ private slots:
 
     void on_dateFinCalendar_selectionChanged();
 
+    void on_supprimerButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

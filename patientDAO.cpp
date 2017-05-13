@@ -89,6 +89,23 @@ void PatientDAO::deletePatientById(int id){
     handler.closeBD();
 }
 
+Patient* PatientDAO::getPatientByName(QString nom, QString prenom){
+    this->q = handler.openBD();
+    QString idQString = QString::number(id);
+    q.exec("SELECT Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateConsultation, DureeConsultation, Priorite FROM TPatient WHERE Nom = '"+nom+"' AND Prenom = '"+prenom+"'");
+    while (q.next()) {
+            Patient * p = new Patient(id, q.value(0).toString(), q.value(1).toString(), q.value(2).toString(),
+                                    q.value(3).toString(), q.value(4).toString(), q.value(5).toString(),
+                                    q.value(6).toInt(), q.value(7).toDate(), q.value(8).toInt(),
+                                    q.value(9).toInt());
+            handler.closeBD();
+            return p;
+        }
+    handler.closeBD();
+    return NULL;
+}
+
+
 void PatientDAO::deletePatientByName(QString name, QString firstName){
     this->q = handler.openBD();
     q.exec("DELETE FROM TPatient WHERE Nom = '"+name+"' AND Prenom = '"+firstName+"'");
