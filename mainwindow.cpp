@@ -86,21 +86,16 @@ void MainWindow::update_patientSearchTableView(){
     PatientDAO * patientDAO = new PatientDAO();
     int rowShift = 1;
     QStringList listeNom;
-    listeNom << "Nom" << "Prenom" << "Adresse" << "Ville" << "Code Postal" << "Durée de consultation"
-             << "Jour de consultation" << "Priorité";
-    QStandardItemModel * standardItemModel = new QStandardItemModel(patientDAO->getNumberOfPatient(),8);
+    listeNom << "Nom" << "Prenom" << "Jour de consultation" << "Numéro d'identification";
+    QStandardItemModel * standardItemModel = new QStandardItemModel(patientDAO->getNumberOfPatient(),4);
     standardItemModel->setHorizontalHeaderLabels(listeNom);
     for (int row = 1; row < patientDAO->getMaxPatientId()+1; ++row) {
         Patient * patient = patientDAO->getPatientById(row);
         if(patient != NULL){
         standardItemModel->setItem(row-rowShift, 0, new QStandardItem(patient->getName()));
         standardItemModel->setItem(row-rowShift, 1, new QStandardItem(patient->getFirstName()));
-        standardItemModel->setItem(row-rowShift, 2, new QStandardItem(patient->getAddress()));
-        standardItemModel->setItem(row-rowShift, 3, new QStandardItem(patient->getCity()));
-        standardItemModel->setItem(row-rowShift, 4, new QStandardItem(patient->getZipCode()));
-        standardItemModel->setItem(row-rowShift, 5, new QStandardItem(QString::number(patient->getConsultTime())));
-        standardItemModel->setItem(row-rowShift, 6, new QStandardItem(patient->getConsultDate().toString()));
-        standardItemModel->setItem(row-rowShift, 7, new QStandardItem(QString::number(patient->getPriority())));
+        standardItemModel->setItem(row-rowShift, 2, new QStandardItem(patient->getConsultDate().toString()));
+        standardItemModel->setItem(row-rowShift, 3, new QStandardItem(QString::number(patient->getId())));
         }
         else rowShift += 1;
     }
@@ -147,21 +142,16 @@ void MainWindow::on_toolBox_currentChanged(int index)
 void MainWindow::search_patientSearchTableView(vector<Patient*> vecPatient)
 {
     QStringList listeNom;
-    listeNom << "Nom" << "Prenom" << "Adresse" << "Ville" << "Code Postal" << "Durée de consultation"
-             << "Jour de consultation" << "Priorité";
-    QStandardItemModel * standardItemModel = new QStandardItemModel(vecPatient.size(),8);
+    listeNom << "Nom" << "Prenom" << "Jour de consultation" << "Numéro d'identification";
+    QStandardItemModel * standardItemModel = new QStandardItemModel(vecPatient.size(),4);
     standardItemModel->setHorizontalHeaderLabels(listeNom);
     for (int row = 0; row < vecPatient.size(); ++row) {
         Patient * patient = vecPatient[row];
         if(patient != NULL){
         standardItemModel->setItem(row, 0, new QStandardItem(patient->getName()));
         standardItemModel->setItem(row, 1, new QStandardItem(patient->getFirstName()));
-        standardItemModel->setItem(row, 2, new QStandardItem(patient->getAddress()));
-        standardItemModel->setItem(row, 3, new QStandardItem(patient->getCity()));
-        standardItemModel->setItem(row, 4, new QStandardItem(patient->getZipCode()));
-        standardItemModel->setItem(row, 5, new QStandardItem(QString::number(patient->getConsultTime())));
-        standardItemModel->setItem(row, 6, new QStandardItem(patient->getConsultDate().toString()));
-        standardItemModel->setItem(row, 7, new QStandardItem(QString::number(patient->getPriority())));
+        standardItemModel->setItem(row, 2, new QStandardItem(patient->getConsultDate().toString()));
+        standardItemModel->setItem(row, 3, new QStandardItem(QString::number(patient->getId())));
         }
     }
     this->ui->patientSearchTableView->setModel(standardItemModel);
