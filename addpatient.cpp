@@ -17,7 +17,7 @@ addPatient::addPatient(QWidget *parent) :
     for(int row = 1; row < ressourceDAO->getMaxRessourceId()+1; row++){
         Ressource* ressource = ressourceDAO->getRessourceById(row);
         if (ressource != NULL)
-        ui->ressourcesComboBox->addItem(ressource->getFirstName()+" "+ressource->getName());
+        ui->ressourcesComboBox->addItem(QString::number(ressource->getId())+" "+ressource->getFirstName()+" "+ressource->getName());
     }
 }
 
@@ -90,7 +90,7 @@ void addPatient::on_addRessourceButton_clicked()
 {
     RessourceDAO ressourceDAO;
     QStringList list = ui->ressourcesComboBox->currentText().split(' ');
-    this->ressources.push_back(ressourceDAO.getRessourceByName(list[1],list[0]));
+    this->ressources.push_back(ressourceDAO.getRessourceById(list[0].toInt()));
     if (ui->ressourcesList->text() != "")
     ui->ressourcesList->setText(ui->ressourcesList->text()+", "+ui->ressourcesComboBox->currentText());
     else ui->ressourcesList->setText(ui->ressourcesComboBox->currentText());

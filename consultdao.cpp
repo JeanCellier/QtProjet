@@ -3,6 +3,9 @@
 #include <QVariant>
 #include <QString>
 #include <iostream>
+#include "ressourceDAO.h"
+
+using namespace std;
 
 ConsultDAO::ConsultDAO()
 {
@@ -66,11 +69,22 @@ int ConsultDAO::getNumberOfConsult(){
 
 }
 
-/*vector<Ressource*> ConsultDAO::getRessourceByIdPatient(int idPatient){
+vector<Ressource*> ConsultDAO::getRessourceByIdPatient(int idPatient){
     this->q = handler.openBD();
+    RessourceDAO* ressourceDAO = new RessourceDAO();
     vector<Ressource*> vecRessource;
-    //Pas Fini
+    vector<int> vecIdRessource;
+    q.exec("SELECT IdRessource FROM TConsult WHERE IdPatient = '"+QString::number(idPatient)+"'");
+    while (q.next()) {
+            int idRessource = q.value(0).toInt();
+            vecIdRessource.push_back(idRessource);
+        }
+    for(int numRessource = 0; numRessource < vecIdRessource.size(); numRessource++){
+            Ressource* r = ressourceDAO->getRessourceById(vecIdRessource[numRessource]);
+            vecRessource.push_back(r);
+        }
+    handler.closeBD();
     return vecRessource;
 
 }
-*/
+

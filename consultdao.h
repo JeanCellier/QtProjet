@@ -7,6 +7,8 @@
 #include "consult.h"
 #include "ressource.h"
 
+using namespace std;
+
 class ConsultDAO
 {
 private:
@@ -21,7 +23,7 @@ public:
     void deleteConsultById(int id);
     int getNumberOfConsult();
     int getMaxConsultId();
-    //vector<Ressource*> getRessourceByIdPatient(int idPatient);
+    vector<Ressource*> getRessourceByIdPatient(int idPatient);
 };
 
 #endif // CONSULTDAO_H

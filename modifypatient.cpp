@@ -5,11 +5,19 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 ModifyPatient::ModifyPatient(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ModifyPatient)
 {
     ui->setupUi(this);
+    RessourceDAO* ressourceDAO = new RessourceDAO();
+    for(int row = 1; row < ressourceDAO->getMaxRessourceId()+1; row++){
+        Ressource* ressource = ressourceDAO->getRessourceById(row);
+        if (ressource != NULL)
+        ui->ressourcesComboBox->addItem(QString::number(ressource->getId())+" "+ressource->getFirstName()+" "+ressource->getName());
+    }
 }
 
 void ModifyPatient::setPatient(Patient* patient){
@@ -21,9 +29,18 @@ void ModifyPatient::setPatient(Patient* patient){
     this->ui->cityLineEdit->setText(patient->getCity());
     this->ui->zipLineEdit->setText(patient->getZipCode());
     this->ui->dayLineEdit->setText(patient->getConsultDate().toString("yyyy-MM-dd"));
-    this->ui->minutesSpinBox->setValue(patient->getPriority());
+    this->ui->minutesSpinBox->setValue(patient->getConsultTime());
+    this->ui->priorityComboBox->setCurrentText(QString::number(patient->getPriority()));
     this->ui->phoneNumberLineEdit->setText(QString::number(patient->getPhoneNumber()));
     this->ui->commentaryLineEdit->setText(patient->getComment());
+
+    ressources.clear();
+    ressources = consultDAO->getRessourceByIdPatient(patient->getId());
+    for(int numRessource = 0; numRessource < ressources.size(); numRessource++){
+        if (ui->ressourcesList->text() != "")
+        ui->ressourcesList->setText(ui->ressourcesList->text()+", "+ressources[numRessource]->getFirstName()+" "+ressources[numRessource]->getName());
+        else ui->ressourcesList->setText(ressources[numRessource]->getFirstName()+" "+ressources[numRessource]->getName());
+        }
 
 }
 
