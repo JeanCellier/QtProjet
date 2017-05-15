@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ModifyPatient</class>
+ <widget class="QDialog" name="ModifyPatient">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1003</width>
+    <height>758</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>70</y>
+     <width>1004</width>
+     <height>3</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>971</width>
+     <height>668</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="nameLabel">
+      <property name="text">
+       <string>Nom * :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="nameLineEdit">
+      <property name="placeholderText">
+       <string>Nom</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="firstNameLabel">
+      <property name="text">
+       <string>Prénom * :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="fistNameLineEdit">
+      <property name="placeholderText">
+       <string>Prénom</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="addressLabel">
+      <property name="text">
+       <string>Adresse * :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="addressLineEdit">
+      <property name="placeholderText">
+       <string>Adresse</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="cityLabel">
+      <property name="text">
+       <string>Ville * :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="cityLineEdit">
+      <property name="placeholderText">
+       <string>Ville</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="zipCodeLabel">
+      <property name="text">
+       <string>Code postal * :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLineEdit" name="zipLineEdit">
+      <property name="placeholderText">
+       <string>Code postal</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="durationLabel">
+      <property name="text">
+       <string>Durée de consultation (minutes) * :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QSpinBox" name="minutesSpinBox">
+      <property name="maximum">
+       <number>9999</number>
+      </property>
+      <property name="value">
+       <number>60</number>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
+     <widget class="QLabel" name="dayLabel">
+      <property name="text">
+       <string>Jour de consltation * :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QLineEdit" name="dayLineEdit">
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QCalendarWidget" name="calendar"/>
+    </item>
+    <item row="10" column="0">
+     <widget class="QLabel" name="priorityLabel">
+      <property name="text">
+       <string>Priorité * :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QComboBox" name="priorityComboBox">
+      <item>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>4</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>5</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="11" column="0">
+     <widget class="QLabel" name="ressourcesLabel">
+      <property name="text">
+       <string>Ressources * :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1">
+     <widget class="QLineEdit" name="ressourcesList">
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+      <property name="placeholderText">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="0">
+     <widget class="QLabel" name="phoneNumberLabel">
+      <property name="text">
+       <string>Numéro de téléphone :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QLineEdit" name="phoneNumberLineEdit">
+      <property name="placeholderText">
+       <string>Numéro de téléphone sans espaces</string>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="0">
+     <widget class="QLabel" name="commentariesLabel">
+      <property name="text">
+       <string>Commentaires :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="1">
+     <widget class="QLineEdit" name="commentaryLineEdit">
+      <property name="placeholderText">
+       <string>Commentaires...</string>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="1">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="16" column="0">
+     <widget class="QPushButton" name="cancelButton">
+      <property name="text">
+       <string>Annuler</string>
+      </property>
+     </widget>
+    </item>
+    <item row="16" column="1">
+     <widget class="QPushButton" name="createPatientButton">
+      <property name="text">
+       <string>Créer ce nouveau patient</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="0">
+     <widget class="QPushButton" name="addRessourceButton">
+      <property name="text">
+       <string>Ajouter Ressource</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="1">
+     <widget class="QComboBox" name="ressourcesComboBox"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="titleLabel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>40</y>
+     <width>1004</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Modifier patient</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>30</y>
+     <width>1004</width>
+     <height>3</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

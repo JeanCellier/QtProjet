@@ -41,7 +41,8 @@ SOURCES += main.cpp\
     consult.cpp \
     typeDAO.cpp \
     compteDAO.cpp \
-    consultDAO.cpp
+    consultDAO.cpp \
+    modifypatient.cpp
 
 HEADERS  += mainwindow.h \
     idwindow.h \
@@ -59,13 +60,15 @@ HEADERS  += mainwindow.h \
     consult.h \
     typeDAO.h \
     compteDAO.h \
-    consultDAO.h
+    consultDAO.h \
+    modifypatient.h
 
 FORMS    += mainwindow.ui \
     idwindow.ui \
     addpatient.ui \
     addhealthcareoperator.ui \
-    about.ui
+    about.ui \
+    modifypatient.ui
 
 DISTFILES +=
 

@@ -1,16 +1,15 @@
-#include "addpatient.h"
-#include "ui_addpatient.h"
+#include "modifypatient.h"
+#include "ui_modifypatient.h"
 #include <QMessageBox>
 #include <stdio.h>
 #include <iostream>
 #include <algorithm>
-#include "ressourceDAO.h"
 
 using namespace std;
 
-addPatient::addPatient(QWidget *parent) :
+ModifyPatient::ModifyPatient(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::addPatient)
+    ui(new Ui::ModifyPatient)
 {
     ui->setupUi(this);
     RessourceDAO* ressourceDAO = new RessourceDAO();
@@ -21,12 +20,40 @@ addPatient::addPatient(QWidget *parent) :
     }
 }
 
-addPatient::~addPatient()
+void ModifyPatient::setPatient(Patient* patient){
+    ConsultDAO* consultDAO = new ConsultDAO();
+    this->patient = patient;
+    this->ui->nameLineEdit->setText(patient->getName());
+    this->ui->fistNameLineEdit->setText(patient->getFirstName());
+    this->ui->addressLineEdit->setText(patient->getAddress());
+    this->ui->cityLineEdit->setText(patient->getCity());
+    this->ui->zipLineEdit->setText(patient->getZipCode());
+    this->ui->dayLineEdit->setText(patient->getConsultDate().toString("yyyy-MM-dd"));
+    this->ui->minutesSpinBox->setValue(patient->getConsultTime());
+    this->ui->priorityComboBox->setCurrentText(QString::number(patient->getPriority()));
+    this->ui->phoneNumberLineEdit->setText(QString::number(patient->getPhoneNumber()));
+    this->ui->commentaryLineEdit->setText(patient->getComment());
+
+    ressources.clear();
+    ressources = consultDAO->getRessourceByIdPatient(patient->getId());
+    for(int numRessource = 0; numRessource < ressources.size(); numRessource++){
+        if (ui->ressourcesList->text() != "")
+        ui->ressourcesList->setText(ui->ressourcesList->text()+", "+ressources[numRessource]->getFirstName()+" "+ressources[numRessource]->getName());
+        else ui->ressourcesList->setText(ressources[numRessource]->getFirstName()+" "+ressources[numRessource]->getName());
+        }
+
+}
+
+Patient* ModifyPatient::getPatient(){
+
+}
+
+ModifyPatient::~ModifyPatient()
 {
     delete ui;
 }
 
-void addPatient::on_createPatientButton_clicked()
+void ModifyPatient::on_createPatientButton_clicked()
 {
     //si tous champs valides, on accept()
 
@@ -76,22 +103,4 @@ void addPatient::on_createPatientButton_clicked()
     //accept();
 }
 
-void addPatient::on_cancelButton_clicked()
-{
-    reject();
-}
 
-void addPatient::on_calendar_selectionChanged()
-{
-    this->ui->dayLineEdit->setText(this->ui->calendar->selectedDate().toString("yyyy-MM-dd"));
-}
-
-void addPatient::on_addRessourceButton_clicked()
-{
-    RessourceDAO ressourceDAO;
-    QStringList list = ui->ressourcesComboBox->currentText().split(' ');
-    this->ressources.push_back(ressourceDAO.getRessourceById(list[0].toInt()));
-    if (ui->ressourcesList->text() != "")
-    ui->ressourcesList->setText(ui->ressourcesList->text()+", "+ui->ressourcesComboBox->currentText());
-    else ui->ressourcesList->setText(ui->ressourcesComboBox->currentText());
-}
