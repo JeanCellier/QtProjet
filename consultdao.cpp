@@ -65,3 +65,12 @@ int ConsultDAO::getNumberOfConsult(){
     return 0;
 
 }
+
+/*vector<Ressource*> ConsultDAO::getRessourceByIdPatient(int idPatient){
+    this->q = handler.openBD();
+    vector<Ressource*> vecRessource;
+    //Pas Fini
+    return vecRessource;
+
+}
+*/

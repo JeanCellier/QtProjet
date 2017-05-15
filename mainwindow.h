@@ -49,6 +49,8 @@ private slots:
 
     void on_supprimerButton_clicked();
 
+    void on_modifierButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

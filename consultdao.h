@@ -5,6 +5,7 @@
 #include "BdHandler.h"
 #include <QSqlQuery>
 #include "consult.h"
+#include "ressource.h"
 
 class ConsultDAO
 {
@@ -20,6 +21,7 @@ public:
     void deleteConsultById(int id);
     int getNumberOfConsult();
     int getMaxConsultId();
+    //vector<Ressource*> getRessourceByIdPatient(int idPatient);
 };
 
 #endif // CONSULTDAO_H

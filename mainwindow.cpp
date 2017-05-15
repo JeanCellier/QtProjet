@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "addpatient.h"
+#include "modifypatient.h"
 #include "addhealthcareoperator.h"
 #include "about.h"
 #include "QStandardItemModel"
@@ -198,11 +199,39 @@ void MainWindow::on_supprimerButton_clicked()
         QModelIndex nomIdx = model->index(obj.row(),0);
         QModelIndex prenomIdx = model->index(obj.row(),1);
 
-        QString nom = model->data(nomIdx).toString();
-        QString prenom = model->data(prenomIdx).toString();
+        QString name = model->data(nomIdx).toString();
+        QString firstName = model->data(prenomIdx).toString();
 
-        patientDAO->deletePatientByName(nom,prenom);
+        patientDAO->deletePatientByName(name,firstName);
         vector<Patient*> vecPatient = patientDAO->getAllPatients();
         search_patientSearchTableView(vecPatient);
+    }
+}
+
+void MainWindow::on_modifierButton_clicked()
+{
+    PatientDAO* patientDAO = new PatientDAO();
+    QAbstractItemModel * model = this->ui->patientSearchTableView->model();
+    QItemSelectionModel * select = this->ui->patientSearchTableView->selectionModel();
+
+    if(!select->selectedRows().isEmpty()){
+        QModelIndex obj = select->selectedRows().at(0);
+
+        QModelIndex nomIdx = model->index(obj.row(),0);
+        QModelIndex prenomIdx = model->index(obj.row(),1);
+
+        QString name = model->data(nomIdx).toString();
+        QString firstName = model->data(prenomIdx).toString();
+
+        Patient * patient = patientDAO->getPatientByName(name,firstName);
+
+        ModifyPatient modifyPatient;
+        modifyPatient.setPatient(patient);
+        if(modifyPatient.exec()==QDialog::Accepted)
+        {
+            modifyPatient.reject();
+            update_ressourceTreeView();
+            this->statusBar()->showMessage("Vous venez de modifier un patient");
+        }
     }
 }
