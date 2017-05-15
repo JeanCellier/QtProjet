@@ -21,6 +21,7 @@ public:
     void addConsult(int id, int idPatient, int idRessource);
     Consult * getConsultById(int id);
     void deleteConsultById(int id);
+    void deleteConsultByValues(int idPatient, int idRessource);
     int getNumberOfConsult();
     int getMaxConsultId();
     vector<Ressource*> getRessourceByIdPatient(int idPatient);

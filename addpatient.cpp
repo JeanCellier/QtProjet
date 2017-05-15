@@ -5,6 +5,7 @@
 #include <iostream>
 #include <algorithm>
 #include "ressourceDAO.h"
+#include "QStandardItemModel"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ addPatient::addPatient(QWidget *parent) :
 {
     ui->setupUi(this);
     RessourceDAO* ressourceDAO = new RessourceDAO();
+    ui->ressourcesComboBox->setMaxVisibleItems(ressourceDAO->getMaxRessourceId());
     for(int row = 1; row < ressourceDAO->getMaxRessourceId()+1; row++){
         Ressource* ressource = ressourceDAO->getRessourceById(row);
         if (ressource != NULL)
@@ -48,7 +50,7 @@ void addPatient::on_createPatientButton_clicked()
     }else if(this->ui->zipLineEdit->text().isEmpty()){
         QMessageBox::warning(this, "Erreur de saisie", "Veuillez renseigner un code postal !");
         champVide = true;
-    }else if(this->ui->ressourcesList->text().isEmpty()){
+    }else if(this->ressources.empty()){
         QMessageBox::warning(this, "Erreur de saisie", "Veuillez ajouter des ressources !");
         champVide = true;
     }
@@ -61,7 +63,7 @@ void addPatient::on_createPatientButton_clicked()
 
         patientDAO->addPatient(newPatientId,this->ui->nameLineEdit->text(),
             this->ui->fistNameLineEdit->text(),this->ui->addressLineEdit->text(),this->ui->cityLineEdit->text(),
-            this->ui->zipLineEdit->text(),this->ui->commentaryLineEdit->text(),this->ui->phoneNumberLineEdit->text().toInt(),
+            this->ui->zipLineEdit->text(),this->ui->commentaryLineEdit->text(),this->ui->phoneNumberLineEdit->text(),
             date, this->ui->minutesSpinBox->text().toInt(),
             this->ui->priorityComboBox->currentText().toInt());
 
@@ -90,8 +92,42 @@ void addPatient::on_addRessourceButton_clicked()
 {
     RessourceDAO ressourceDAO;
     QStringList list = ui->ressourcesComboBox->currentText().split(' ');
-    this->ressources.push_back(ressourceDAO.getRessourceById(list[0].toInt()));
-    if (ui->ressourcesList->text() != "")
-    ui->ressourcesList->setText(ui->ressourcesList->text()+", "+ui->ressourcesComboBox->currentText());
-    else ui->ressourcesList->setText(ui->ressourcesComboBox->currentText());
+    bool itemExist = false;
+    for (int numRessource = 0; numRessource < ressources.size(); numRessource++){
+        if(ressources[numRessource]->getId() == list[0].toInt()){
+            QMessageBox::warning(this, "Erreur de saisie", "Deux ressources identiques !");
+            itemExist = true;
+        }
+    }
+    if(!itemExist) this->ressources.push_back(ressourceDAO.getRessourceById(list[0].toInt()));
+    updateRessourceTableView();
+}
+
+void addPatient::updateRessourceTableView()
+{
+    QStringList listeNom;
+    listeNom << "Nom" << "Prenom";
+    QStandardItemModel * standardItemModel = new QStandardItemModel(ressources.size(),2);
+    standardItemModel->setHorizontalHeaderLabels(listeNom);
+    for (int row = 0; row < ressources.size(); ++row) {
+        Ressource * ressource = ressources[row];
+        if(ressource != NULL){
+        standardItemModel->setItem(row, 0, new QStandardItem(ressource->getName()));
+        standardItemModel->setItem(row, 1, new QStandardItem(ressource->getFirstName()));
+        }
+    }
+    this->ui->ressourceTableView->setModel(standardItemModel);
+}
+
+void addPatient::on_deleteRessourceButton_clicked()
+{
+    QAbstractItemModel * model = this->ui->ressourceTableView->model();
+    QItemSelectionModel * select = this->ui->ressourceTableView->selectionModel();
+
+    if(!select->selectedRows().isEmpty()){
+        QModelIndex obj = select->selectedRows().at(0);
+        int id = obj.row();
+        ressources.erase(ressources.begin()+id);
+        updateRessourceTableView();
+    }
 }

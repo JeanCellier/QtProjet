@@ -20,14 +20,14 @@ private :
     QString zipCode;
     QString comment;
 
-    int phoneNumber;
+    QString phoneNumber;
     QDate consultDate;
     int consultTime;
     int priority;
 
 public :
     Patient(int id, QString name, QString firstName, QString address, QString city, QString zipCode,
-            QString comment, int phoneNumber, QDate consultDate, int consultTime, int priority);
+            QString comment, QString phoneNumber, QDate consultDate, int consultTime, int priority);
     int getId();
     QString getFirstName();
     QString getName();
@@ -36,7 +36,7 @@ public :
     QString getZipCode();
     QString getComment();
 
-    int getPhoneNumber();
+    QString getPhoneNumber();
     QDate getConsultDate();
     int getConsultTime();
     int getPriority();

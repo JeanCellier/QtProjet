@@ -1,7 +1,7 @@
 #include "Patient.h"
 
 Patient::Patient(int id, QString name, QString firstName, QString address, QString city,
-                 QString zipCode, QString comment, int phoneNumber, QDate consultDate, int consultTime, int priority) {
+                 QString zipCode, QString comment, QString phoneNumber, QDate consultDate, int consultTime, int priority) {
     this->id = id;
     this->name = name;
     this->firstName = firstName;
@@ -43,7 +43,7 @@ QString Patient::getComment() {
     return this->comment;
 }
 
-int Patient::getPhoneNumber() {
+QString Patient::getPhoneNumber() {
     return this->phoneNumber;
 }
 

@@ -19,9 +19,18 @@ public:
     ~ModifyPatient();
     void setPatient(Patient* patient);
     Patient* getPatient();
+    void updateRessourceTableView();
 
 private slots:
-    void on_createPatientButton_clicked();
+    void on_modifyPatientButton_clicked();
+
+    void on_deleteRessourceButton_clicked();
+
+    void on_calendar_selectionChanged();
+
+    void on_cancelButton_clicked();
+
+    void on_addRessourceButton_clicked();
 
 private:
     Ui::ModifyPatient *ui;

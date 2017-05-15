@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1003</width>
-    <height>758</height>
+    <height>968</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
      <x>20</x>
      <y>80</y>
      <width>971</width>
-     <height>668</height>
+     <height>871</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
@@ -183,45 +183,35 @@
       </property>
      </widget>
     </item>
-    <item row="11" column="1">
-     <widget class="QLineEdit" name="ressourcesList">
-      <property name="readOnly">
-       <bool>false</bool>
-      </property>
-      <property name="placeholderText">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="13" column="0">
+    <item row="15" column="0">
      <widget class="QLabel" name="phoneNumberLabel">
       <property name="text">
        <string>Numéro de téléphone :</string>
       </property>
      </widget>
     </item>
-    <item row="13" column="1">
+    <item row="15" column="1">
      <widget class="QLineEdit" name="phoneNumberLineEdit">
       <property name="placeholderText">
        <string>Numéro de téléphone sans espaces</string>
       </property>
      </widget>
     </item>
-    <item row="14" column="0">
+    <item row="16" column="0">
      <widget class="QLabel" name="commentariesLabel">
       <property name="text">
        <string>Commentaires :</string>
       </property>
      </widget>
     </item>
-    <item row="14" column="1">
+    <item row="16" column="1">
      <widget class="QLineEdit" name="commentaryLineEdit">
       <property name="placeholderText">
        <string>Commentaires...</string>
       </property>
      </widget>
     </item>
-    <item row="15" column="1">
+    <item row="17" column="1">
      <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -234,17 +224,17 @@
       </property>
      </spacer>
     </item>
-    <item row="16" column="0">
+    <item row="18" column="0">
      <widget class="QPushButton" name="cancelButton">
       <property name="text">
        <string>Annuler</string>
       </property>
      </widget>
     </item>
-    <item row="16" column="1">
-     <widget class="QPushButton" name="createPatientButton">
+    <item row="18" column="1">
+     <widget class="QPushButton" name="modifyPatientButton">
       <property name="text">
-       <string>Créer ce nouveau patient</string>
+       <string>Modifier le patient</string>
       </property>
      </widget>
     </item>
@@ -257,6 +247,16 @@
     </item>
     <item row="12" column="1">
      <widget class="QComboBox" name="ressourcesComboBox"/>
+    </item>
+    <item row="11" column="1">
+     <widget class="QTableView" name="ressourceTableView"/>
+    </item>
+    <item row="14" column="0">
+     <widget class="QPushButton" name="deleteRessourceButton">
+      <property name="text">
+       <string>Supprimer Ressource</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

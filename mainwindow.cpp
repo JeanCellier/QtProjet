@@ -230,7 +230,7 @@ void MainWindow::on_modifierButton_clicked()
         if(modifyPatient.exec()==QDialog::Accepted)
         {
             modifyPatient.reject();
-            update_ressourceTreeView();
+            update_patientSearchTableView();
             this->statusBar()->showMessage("Vous venez de modifier un patient");
         }
     }

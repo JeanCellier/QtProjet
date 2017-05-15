@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <algorithm>
+#include <QStandardItemModel>
 
 using namespace std;
 
@@ -13,6 +14,7 @@ ModifyPatient::ModifyPatient(QWidget *parent) :
 {
     ui->setupUi(this);
     RessourceDAO* ressourceDAO = new RessourceDAO();
+    ui->ressourcesComboBox->setMaxVisibleItems(ressourceDAO->getMaxRessourceId());
     for(int row = 1; row < ressourceDAO->getMaxRessourceId()+1; row++){
         Ressource* ressource = ressourceDAO->getRessourceById(row);
         if (ressource != NULL)
@@ -31,16 +33,12 @@ void ModifyPatient::setPatient(Patient* patient){
     this->ui->dayLineEdit->setText(patient->getConsultDate().toString("yyyy-MM-dd"));
     this->ui->minutesSpinBox->setValue(patient->getConsultTime());
     this->ui->priorityComboBox->setCurrentText(QString::number(patient->getPriority()));
-    this->ui->phoneNumberLineEdit->setText(QString::number(patient->getPhoneNumber()));
+    this->ui->phoneNumberLineEdit->setText(patient->getPhoneNumber());
     this->ui->commentaryLineEdit->setText(patient->getComment());
 
     ressources.clear();
     ressources = consultDAO->getRessourceByIdPatient(patient->getId());
-    for(int numRessource = 0; numRessource < ressources.size(); numRessource++){
-        if (ui->ressourcesList->text() != "")
-        ui->ressourcesList->setText(ui->ressourcesList->text()+", "+ressources[numRessource]->getFirstName()+" "+ressources[numRessource]->getName());
-        else ui->ressourcesList->setText(ressources[numRessource]->getFirstName()+" "+ressources[numRessource]->getName());
-        }
+    updateRessourceTableView();
 
 }
 
@@ -53,7 +51,7 @@ ModifyPatient::~ModifyPatient()
     delete ui;
 }
 
-void ModifyPatient::on_createPatientButton_clicked()
+void ModifyPatient::on_modifyPatientButton_clicked()
 {
     //si tous champs valides, on accept()
 
@@ -75,7 +73,7 @@ void ModifyPatient::on_createPatientButton_clicked()
     }else if(this->ui->zipLineEdit->text().isEmpty()){
         QMessageBox::warning(this, "Erreur de saisie", "Veuillez renseigner un code postal !");
         champVide = true;
-    }else if(this->ui->ressourcesList->text().isEmpty()){
+    }else if(ressources.empty()){
         QMessageBox::warning(this, "Erreur de saisie", "Veuillez ajouter des ressources !");
         champVide = true;
     }
@@ -83,19 +81,31 @@ void ModifyPatient::on_createPatientButton_clicked()
     if(champVide == false){
         PatientDAO* patientDAO = new PatientDAO();
         ConsultDAO* consultDAO = new ConsultDAO();
-        int newPatientId = patientDAO->getMaxPatientId()+1;
         QDate date = QDate::fromString(this->ui->dayLineEdit->text(),"yyyy-MM-dd");
 
-        patientDAO->addPatient(newPatientId,this->ui->nameLineEdit->text(),
-            this->ui->fistNameLineEdit->text(),this->ui->addressLineEdit->text(),this->ui->cityLineEdit->text(),
-            this->ui->zipLineEdit->text(),this->ui->commentaryLineEdit->text(),this->ui->phoneNumberLineEdit->text().toInt(),
-            date, this->ui->minutesSpinBox->text().toInt(),
-            this->ui->priorityComboBox->currentText().toInt());
+        vector<Ressource *> oldRessources = consultDAO->getRessourceByIdPatient(patient->getId());
 
         for (int numRessource = 0; numRessource < ressources.size(); numRessource++){
-            Ressource* ressource = ressources[numRessource];
-            consultDAO->addConsult(consultDAO->getMaxConsultId()+1,newPatientId,ressource->getId());
+                    Ressource* ressource = ressources[numRessource];
+                    bool itemExist = false;
+                    for (int numRessource = 0; numRessource < oldRessources.size(); numRessource++){
+                        if(oldRessources[numRessource]->getId() == ressource->getId()){
+                            oldRessources.erase(oldRessources.begin()+numRessource);
+                            itemExist = true;
+                        }
+                    }
+                    if(!itemExist)consultDAO->addConsult(consultDAO->getMaxConsultId()+1,patient->getId(),ressource->getId());
+                }
+        for (int numRessource = 0; numRessource < oldRessources.size(); numRessource++){
+            consultDAO->deleteConsultByValues(patient->getId(),oldRessources[numRessource]->getId());
         }
+
+
+        patientDAO->modifyPatient(patient->getId(),this->ui->nameLineEdit->text(),
+            this->ui->fistNameLineEdit->text(),this->ui->addressLineEdit->text(),this->ui->cityLineEdit->text(),
+            this->ui->zipLineEdit->text(),this->ui->commentaryLineEdit->text(),this->ui->phoneNumberLineEdit->text(),
+            date, this->ui->minutesSpinBox->text().toInt(),
+            this->ui->priorityComboBox->currentText().toInt());
 
         //formater les champs majuscule/minuscule
         accept();
@@ -103,4 +113,56 @@ void ModifyPatient::on_createPatientButton_clicked()
     //accept();
 }
 
+void ModifyPatient::updateRessourceTableView()
+{
+    QStringList listeNom;
+    listeNom << "Nom" << "Prenom";
+    QStandardItemModel * standardItemModel = new QStandardItemModel(ressources.size(),2);
+    standardItemModel->setHorizontalHeaderLabels(listeNom);
+    for (int row = 0; row < ressources.size(); ++row) {
+        Ressource * ressource = ressources[row];
+        if(ressource != NULL){
+        standardItemModel->setItem(row, 0, new QStandardItem(ressource->getName()));
+        standardItemModel->setItem(row, 1, new QStandardItem(ressource->getFirstName()));
+        }
+    }
+    this->ui->ressourceTableView->setModel(standardItemModel);
+}
 
+void ModifyPatient::on_deleteRessourceButton_clicked()
+{
+    QAbstractItemModel * model = this->ui->ressourceTableView->model();
+    QItemSelectionModel * select = this->ui->ressourceTableView->selectionModel();
+
+    if(!select->selectedRows().isEmpty()){
+        QModelIndex obj = select->selectedRows().at(0);
+        int id = obj.row();
+        ressources.erase(ressources.begin()+id);
+        updateRessourceTableView();
+    }
+}
+
+void ModifyPatient::on_calendar_selectionChanged()
+{
+    this->ui->dayLineEdit->setText(this->ui->calendar->selectedDate().toString("yyyy-MM-dd"));
+}
+
+void ModifyPatient::on_cancelButton_clicked()
+{
+    reject();
+}
+
+void ModifyPatient::on_addRessourceButton_clicked()
+{
+    RessourceDAO ressourceDAO;
+    QStringList list = ui->ressourcesComboBox->currentText().split(' ');
+    bool itemExist = false;
+    for (int numRessource = 0; numRessource < ressources.size(); numRessource++){
+        if(ressources[numRessource]->getId() == list[0].toInt()){
+            QMessageBox::warning(this, "Erreur de saisie", "Deux ressources identiques !");
+            itemExist = true;
+        }
+    }
+    if(!itemExist) this->ressources.push_back(ressourceDAO.getRessourceById(list[0].toInt()));
+    updateRessourceTableView();
+}

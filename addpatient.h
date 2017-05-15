@@ -19,6 +19,7 @@ class addPatient : public QDialog
 public:
     explicit addPatient(QWidget *parent = 0);
     ~addPatient();
+    void updateRessourceTableView();
 
 private slots:
     void on_createPatientButton_clicked();
@@ -28,6 +29,8 @@ private slots:
     void on_calendar_selectionChanged();
 
     void on_addRessourceButton_clicked();
+
+    void on_deleteRessourceButton_clicked();
 
 private:
     Ui::addPatient *ui;

@@ -14,12 +14,24 @@ PatientDAO::~PatientDAO()
 {
 }
 
-void PatientDAO::addPatient(int id, QString name, QString firstName, QString address, QString city, QString zipCode, QString comment, int phoneNumber, QDate consultDate, int consultTime, int priority){
+void PatientDAO::addPatient(int id, QString name, QString firstName, QString address, QString city, QString zipCode, QString comment, QString phoneNumber, QDate consultDate, int consultTime, int priority){
     this->q = handler.openBD();
+    if (phoneNumber == NULL) phoneNumber = "";
     if (comment == NULL) comment = "";
     q.exec("INSERT INTO TPatient "
            "SELECT '" +QString::number(id)+"' AS 'Id', '"+name+"' AS 'Nom', '"+firstName+"' AS 'Prenom', '"+address+"' AS 'Adresse', '"+city+"' AS 'Ville', '"+zipCode+"' AS 'CP'"
-           ", '"+comment+"' AS 'Commentaire', '"+QString::number(phoneNumber)+"' AS 'Tel', '"+consultDate.toString("yyyy-MM-dd")+"' AS 'DateConsultation', '"+QString::number(consultTime)+"' AS 'DureeConsultation', '"+QString::number(priority)+"' AS 'Priorite'");
+           ", '"+comment+"' AS 'Commentaire', '"+phoneNumber+"' AS 'Tel', '"+consultDate.toString("yyyy-MM-dd")+"' AS 'DateConsultation', '"+QString::number(consultTime)+"' AS 'DureeConsultation', '"+QString::number(priority)+"' AS 'Priorite'");
+    handler.closeBD();
+}
+
+void PatientDAO::modifyPatient(int id, QString name, QString firstName, QString address, QString city, QString zipCode, QString comment, QString phoneNumber, QDate consultDate, int consultTime, int priority){
+    this->q = handler.openBD();
+    if (phoneNumber == NULL) phoneNumber = "";
+    if (comment == NULL) comment = "";
+    q.exec("UPDATE TPatient "
+           "SET NOM = '"+name+"', Prenom = '"+firstName+"', Adresse = '"+address+"', Ville = '"+city+"', CP = '"+zipCode+"'"
+           ", Commentaire = '"+comment+"', Tel = '"+phoneNumber+"', DateConsultation = '"+consultDate.toString("yyyy-MM-dd")+"', DureeConsultation = '"+QString::number(consultTime)+"', "
+           "Priorite = '"+QString::number(priority)+"' WHERE Id = '"+QString::number(id)+"'");
     handler.closeBD();
 }
 
@@ -35,7 +47,7 @@ vector<Patient*> PatientDAO::getPatientsByValues(int id, QString name, QString f
     while (q.next()) {
             Patient * p = new Patient(q.value(0).toInt(), q.value(1).toString(), q.value(2).toString(),
                                     q.value(3).toString(), q.value(4).toString(), q.value(5).toString(),
-                                    q.value(6).toString(), q.value(7).toInt(), q.value(8).toDate(),
+                                    q.value(6).toString(), q.value(7).toString(), q.value(8).toDate(),
                                     q.value(9).toInt(),q.value(10).toInt());
             vecPatient.push_back(p);
         }
@@ -52,7 +64,7 @@ vector<Patient*> PatientDAO::getAllPatients(){
     while (q.next()) {
             Patient * p = new Patient(q.value(0).toInt(), q.value(1).toString(), q.value(2).toString(),
                                     q.value(3).toString(), q.value(4).toString(), q.value(5).toString(),
-                                    q.value(6).toString(), q.value(7).toInt(), q.value(8).toDate(),
+                                    q.value(6).toString(), q.value(7).toString(), q.value(8).toDate(),
                                     q.value(9).toInt(),q.value(10).toInt());
             vecPatient.push_back(p);
         }
@@ -67,7 +79,7 @@ Patient* PatientDAO::getPatientById(int id){
     while (q.next()) {
             Patient * p = new Patient(id, q.value(0).toString(), q.value(1).toString(), q.value(2).toString(),
                                     q.value(3).toString(), q.value(4).toString(), q.value(5).toString(),
-                                    q.value(6).toInt(), q.value(7).toDate(), q.value(8).toInt(),
+                                    q.value(6).toString(), q.value(7).toDate(), q.value(8).toInt(),
                                     q.value(9).toInt());
             handler.closeBD();
             return p;
@@ -113,7 +125,7 @@ Patient* PatientDAO::getPatientByName(QString nom, QString prenom){
     while (q.next()) {
             Patient * p = new Patient(q.value(0).toInt(), q.value(1).toString(), q.value(2).toString(), q.value(3).toString(),
                                     q.value(4).toString(), q.value(5).toString(), q.value(6).toString(),
-                                    q.value(7).toInt(), q.value(8).toDate(), q.value(9).toInt(),
+                                    q.value(7).toString(), q.value(8).toDate(), q.value(9).toInt(),
                                     q.value(10).toInt());
             handler.closeBD();
             return p;

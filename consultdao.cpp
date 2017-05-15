@@ -31,6 +31,14 @@ void ConsultDAO::deleteConsultById(int id){
     handler.closeBD();
 }
 
+void ConsultDAO::deleteConsultByValues(int idPatient, int idRessource){
+    this->q = handler.openBD();
+    q.exec("DELETE FROM TConsult "
+           "WHERE IdPatient = '" +QString::number(idPatient)+"' AND IdRessource = '" +QString::number(idRessource)+"'");
+    handler.closeBD();
+}
+
+
 Consult* ConsultDAO::getConsultById(int id){
     this->q = handler.openBD();
     QString idQString = QString::number(id);
@@ -85,6 +93,5 @@ vector<Ressource*> ConsultDAO::getRessourceByIdPatient(int idPatient){
         }
     handler.closeBD();
     return vecRessource;
-
 }
 
