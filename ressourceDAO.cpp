@@ -107,3 +107,9 @@ void RessourceDAO::deleteRessourceById(int id){
     q.exec("DELETE FROM TRessource WHERE Id = "+QString::number(id));
     handler.closeBD();
 }
+
+void RessourceDAO::modifyRessource(int id, QString name, QString firstName, int idType){
+    this->q = handler.openBD();
+    q.exec("UPDATE TRessource SET Nom = '"+name+"', Prenom = '"+firstName+"',IdType = '"+QString::number(idType)+"' WHERE Id = "+QString::number(id));
+    handler.closeBD();
+}

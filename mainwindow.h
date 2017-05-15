@@ -50,6 +50,8 @@ private slots:
     void on_DeleteRessourceButton_clicked();
     void on_modifierButton_clicked();
 
+    void on_ModifierButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

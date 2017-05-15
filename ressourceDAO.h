@@ -20,6 +20,7 @@ public:
     void addRessource(int id, QString name, QString firstName, int idType);
     Ressource* getRessourceById(int id);
     Ressource* getRessourceByName(QString name, QString firstName);
+    void modifyRessource(int id, QString name, QString firstName, int idType);
     vector<Ressource*> getRessourcesByIdType(int idType);
     void deleteRessourceById(int id);
     void deleteRessourceByName(QString name, QString firstName);

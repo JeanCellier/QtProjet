@@ -18,7 +18,9 @@ public:
 
     void addCompte(int id, int idRessource, QString login, QString mdp);
     Compte * getCompteById(int id);
+    Compte * getCompteByIdRessource(int idRessource);
     Compte * getCompteByLogin(QString login);
+    void modifyCompte(int id, int idRessource, QString login, QString mdp);
     void deleteCompteById(int id);
     void deleteCompte0ByRessource(int idRessource);
     int getNumberOfCompte();

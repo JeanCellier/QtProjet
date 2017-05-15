@@ -9,6 +9,7 @@
 #include "patientDAO.h"
 #include "ressourceDAO.h"
 #include "typeDAO.h"
+#include "modifyhealthcareoperator.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -254,6 +255,36 @@ void MainWindow::on_modifierButton_clicked()
             modifyPatient.reject();
             update_ressourceTreeView();
             this->statusBar()->showMessage("Vous venez de modifier un patient");
+        }
+    }
+}
+
+void MainWindow::on_ModifierButton_clicked()
+{
+    RessourceDAO * ressourceDAO = new RessourceDAO();
+    Ressource * ressource = NULL;
+
+    QModelIndex index = this->ui->ressourceTreeView->currentIndex();
+    QVariant data = this->ui->ressourceTreeView->model()->data(index);
+    QString text = data.toString();
+
+    map<int, QString> names = ressourceDAO->getRessourcesFullNames();
+    std::cout << "allo : " << names.size() << std::endl;
+    map<int, QString>::const_iterator mit;
+
+    for(mit = names.begin();mit!=names.end();mit++) {
+        if(text == mit->second){
+            ressource = ressourceDAO->getRessourceById(mit->first);
+        }
+      }
+    if (ressource != NULL){
+        ModifyHealthcareOperator modifyHealthcareOperator;
+        modifyHealthcareOperator.setRessource(ressource);
+        if(modifyHealthcareOperator.exec()==QDialog::Accepted)
+        {
+            modifyHealthcareOperator.reject();
+            update_ressourceTreeView();
+            this->statusBar()->showMessage("Vous venez de modifier une ressource");
         }
     }
 }

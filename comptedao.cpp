@@ -21,6 +21,13 @@ void CompteDAO::addCompte(int id, int idRessource, QString login, QString mdp){
     handler.closeBD();
 }
 
+void CompteDAO::modifyCompte(int id, int idRessource, QString login, QString mdp){
+    this->q = handler.openBD();
+    q.exec("UPDATE TCompte "
+           "SET IdRessource = '"+QString::number(idRessource)+"', Login = '"+login+"', Mdp = '"+mdp+"' WHERE Id = '" +QString::number(id)+"'");
+    handler.closeBD();
+}
+
 Compte * CompteDAO::getCompteById(int id){
     this->q = handler.openBD();
     QString idQString = QString::number(id);
@@ -60,9 +67,21 @@ int CompteDAO::getMaxCompteId(){
 
 Compte * CompteDAO::getCompteByLogin(QString login){
     this->q = handler.openBD();
-    q.exec("SELECT Id, IdRessource, Mdp FROM TCompte");
+    q.exec("SELECT Id, IdRessource, Mdp FROM TCompte WHERE Login = '"+login+"'");
     while (q.next()) {
             Compte * c = new Compte(q.value(0).toInt(), q.value(1).toInt(), login, q.value(2).toString());
+            handler.closeBD();
+            return c;
+    }
+    handler.closeBD();
+    return NULL;
+}
+
+Compte * CompteDAO::getCompteByIdRessource(int idRessource){
+    this->q = handler.openBD();
+    q.exec("SELECT Id, Login, Mdp FROM TCompte");
+    while (q.next()) {
+            Compte * c = new Compte(q.value(0).toInt(), idRessource, q.value(1).toString(), q.value(2).toString());
             handler.closeBD();
             return c;
     }
