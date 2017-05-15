@@ -49,6 +49,10 @@ private slots:
 
     void on_supprimerButton_clicked();
 
+    void on_deleteButton_clicked();
+
+    void on_DeleteRessourceButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

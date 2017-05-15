@@ -4,6 +4,7 @@
 #include <QVariant>
 #include "BdHandler.h"
 #include "ressource.h"
+#include <map>
 
 using namespace std;
 
@@ -25,6 +26,7 @@ public:
     int getNumberOfRessourceByIdType(int idType);
     int getNumberOfRessource();
     int getMaxRessourceId();
+    map<int, QString> getRessourcesFullNames();
 
 };
 

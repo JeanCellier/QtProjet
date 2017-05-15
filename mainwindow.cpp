@@ -117,13 +117,13 @@ void MainWindow::update_ressourceTreeView()
         {
             Type* type = typeDAO->getTypeById(parent);
             if(type != NULL){
-            QStandardItem *standardParent = new QStandardItem(type->getLabel());
-            rootNode-> appendRow(standardParent);
-            vector<Ressource*> ressources = ressourceDAO->getRessourcesByIdType(parent);
-            for (int row = 0; row < ressources.size(); row++) {
-                    Ressource * ressource = ressources[row];
-                    QStandardItem *standardRessource = new QStandardItem(ressource->getFirstName()+" "+ressource->getName());
-                    standardParent-> appendRow(standardRessource);
+                QStandardItem *standardParent = new QStandardItem(type->getLabel());
+                rootNode-> appendRow(standardParent);
+                vector<Ressource*> ressources = ressourceDAO->getRessourcesByIdType(parent);
+                for (int row = 0; row < ressources.size(); row++) {
+                        Ressource * ressource = ressources[row];
+                        QStandardItem *standardRessource = new QStandardItem(ressource->getFirstName()+" "+ressource->getName());
+                        standardParent-> appendRow(standardRessource);
                 }
             }
         }
@@ -205,4 +205,43 @@ void MainWindow::on_supprimerButton_clicked()
         vector<Patient*> vecPatient = patientDAO->getAllPatients();
         search_patientSearchTableView(vecPatient);
     }
+}
+
+void MainWindow::on_DeleteRessourceButton_clicked()
+{
+    RessourceDAO * ressourceDAO = new RessourceDAO();
+
+    /*QItemSelectionModel * select = this->ui->ressourceTreeView->selectionModel();
+    QAbstractItemModel * model = this->ui->ressourceTreeView->model();
+
+    if(!select->selectedRows().isEmpty()){
+        QModelIndex obj = select->selectedRows().at(0);
+
+        QModelIndex nomIdx = model->index(obj.row(),0);
+        QModelIndex prenomIdx = model->index(obj.row(),1);
+
+        QString nom = model->data(nomIdx).toString();
+        QString prenom = model->data(prenomIdx).toString();
+
+        patientDAO->deletePatientByName(nom,prenom);
+        vector<Patient*> vecPatient = patientDAO->getAllPatients();
+        search_patientSearchTableView(vecPatient);
+    }*/
+
+    QModelIndex index = this->ui->ressourceTreeView->currentIndex();
+    QVariant data = this->ui->ressourceTreeView->model()->data(index);
+    QString text = data.toString();
+
+    map<int, QString> names = ressourceDAO->getRessourcesFullNames();
+    std::cout << "allo : " << names.size() << std::endl;
+    map<int, QString>::const_iterator mit;
+
+    for(mit = names.begin();mit!=names.end();mit++) {
+
+        if(text == mit->second){
+            ressourceDAO->deleteRessourceById(mit->first);
+        }
+      }
+
+    update_ressourceTreeView();
 }

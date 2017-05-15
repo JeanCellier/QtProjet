@@ -21,13 +21,13 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="patientSearch">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-220</y>
+         <y>-233</y>
          <width>1090</width>
          <height>754</height>
         </rect>
@@ -259,6 +259,27 @@ unique ligne en cliquant sur le numéro de la ligne tout à gauche.</string>
         <string>Planification</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="ModifierButton">
+            <property name="text">
+             <string>Modifier la ressource selectionnée</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="DeleteRessourceButton">
+            <property name="text">
+             <string>Supprimer la ressource selectionnée</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
         <item>
          <widget class="QTreeView" name="ressourceTreeView">
           <property name="autoFillBackground">
