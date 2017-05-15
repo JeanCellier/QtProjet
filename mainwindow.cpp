@@ -118,13 +118,13 @@ void MainWindow::update_ressourceTreeView()
         {
             Type* type = typeDAO->getTypeById(parent);
             if(type != NULL){
-            QStandardItem *standardParent = new QStandardItem(type->getLabel());
-            rootNode-> appendRow(standardParent);
-            vector<Ressource*> ressources = ressourceDAO->getRessourcesByIdType(parent);
-            for (int row = 0; row < ressources.size(); row++) {
-                    Ressource * ressource = ressources[row];
-                    QStandardItem *standardRessource = new QStandardItem(ressource->getFirstName()+" "+ressource->getName());
-                    standardParent-> appendRow(standardRessource);
+                QStandardItem *standardParent = new QStandardItem(type->getLabel());
+                rootNode-> appendRow(standardParent);
+                vector<Ressource*> ressources = ressourceDAO->getRessourcesByIdType(parent);
+                for (int row = 0; row < ressources.size(); row++) {
+                        Ressource * ressource = ressources[row];
+                        QStandardItem *standardRessource = new QStandardItem(ressource->getFirstName()+" "+ressource->getName());
+                        standardParent-> appendRow(standardRessource);
                 }
             }
         }
@@ -187,7 +187,7 @@ void MainWindow::on_dateFinCalendar_selectionChanged()
     this->ui->endDateLineEdit->setText(this->ui->dateFinCalendar->selectedDate().toString("yyyy-MM-dd"));
 }
 
-void MainWindow::on_supprimerButton_clicked()
+void MainWindow::on_deleteButton_clicked()
 {
     PatientDAO* patientDAO = new PatientDAO();
     QAbstractItemModel * model = this->ui->patientSearchTableView->model();
@@ -206,6 +206,28 @@ void MainWindow::on_supprimerButton_clicked()
         vector<Patient*> vecPatient = patientDAO->getAllPatients();
         search_patientSearchTableView(vecPatient);
     }
+}
+
+void MainWindow::on_DeleteRessourceButton_clicked()
+{
+    RessourceDAO * ressourceDAO = new RessourceDAO();
+
+
+    QModelIndex index = this->ui->ressourceTreeView->currentIndex();
+    QVariant data = this->ui->ressourceTreeView->model()->data(index);
+    QString text = data.toString();
+
+    map<int, QString> names = ressourceDAO->getRessourcesFullNames();
+    std::cout << "allo : " << names.size() << std::endl;
+    map<int, QString>::const_iterator mit;
+
+    for(mit = names.begin();mit!=names.end();mit++) {
+        if(text == mit->second){
+            ressourceDAO->deleteRessourceById(mit->first);
+        }
+      }
+
+    update_ressourceTreeView();
 }
 
 void MainWindow::on_modifierButton_clicked()
@@ -230,7 +252,7 @@ void MainWindow::on_modifierButton_clicked()
         if(modifyPatient.exec()==QDialog::Accepted)
         {
             modifyPatient.reject();
-            update_patientSearchTableView();
+            update_ressourceTreeView();
             this->statusBar()->showMessage("Vous venez de modifier un patient");
         }
     }

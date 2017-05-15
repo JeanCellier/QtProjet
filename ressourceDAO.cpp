@@ -90,3 +90,20 @@ int RessourceDAO::getMaxRessourceId(){
     handler.closeBD();
     return 0;
 }
+
+map<int, QString> RessourceDAO::getRessourcesFullNames(){
+    this->q = handler.openBD();
+    map<int, QString> names;
+    q.exec("SELECT Id, Nom, Prenom FROM TRessource");
+    while (q.next()) {
+            names[q.value(0).toInt()] = q.value(2).toString() + " " + q.value(1).toString();
+        }
+    handler.closeBD();
+    return names;
+}
+
+void RessourceDAO::deleteRessourceById(int id){
+    this->q = handler.openBD();
+    q.exec("DELETE FROM TRessource WHERE Id = "+QString::number(id));
+    handler.closeBD();
+}

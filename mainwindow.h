@@ -45,8 +45,9 @@ private slots:
 
     void on_dateFinCalendar_selectionChanged();
 
-    void on_supprimerButton_clicked();
+    void on_deleteButton_clicked();
 
+    void on_DeleteRessourceButton_clicked();
     void on_modifierButton_clicked();
 
 private:
