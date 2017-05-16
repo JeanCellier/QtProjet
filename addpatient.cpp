@@ -67,7 +67,7 @@ void addPatient::on_createPatientButton_clicked()
             date, this->ui->minutesSpinBox->text().toInt(),
             this->ui->priorityComboBox->currentText().toInt());
 
-        for (int numRessource = 0; numRessource < ressources.size(); numRessource++){
+        for (unsigned int numRessource = 0; numRessource < ressources.size(); numRessource++){
             Ressource* ressource = ressources[numRessource];
             consultDAO->addConsult(consultDAO->getMaxConsultId()+1,newPatientId,ressource->getId());
         }
@@ -85,7 +85,10 @@ void addPatient::on_cancelButton_clicked()
 
 void addPatient::on_calendar_selectionChanged()
 {
-    this->ui->dayLineEdit->setText(this->ui->calendar->selectedDate().toString("yyyy-MM-dd"));
+    if(this->ui->calendar->selectedDate() < QDate::currentDate()){
+        QMessageBox::warning(this, "Erreur de saisie", "Date antérieure à la date d'aujourd'hui !");
+    }
+    else this->ui->dayLineEdit->setText(this->ui->calendar->selectedDate().toString("yyyy-MM-dd"));
 }
 
 void addPatient::on_addRessourceButton_clicked()
@@ -93,7 +96,7 @@ void addPatient::on_addRessourceButton_clicked()
     RessourceDAO ressourceDAO;
     QStringList list = ui->ressourcesComboBox->currentText().split(' ');
     bool itemExist = false;
-    for (int numRessource = 0; numRessource < ressources.size(); numRessource++){
+    for (unsigned int numRessource = 0; numRessource < ressources.size(); numRessource++){
         if(ressources[numRessource]->getId() == list[0].toInt()){
             QMessageBox::warning(this, "Erreur de saisie", "Deux ressources identiques !");
             itemExist = true;
@@ -109,7 +112,7 @@ void addPatient::updateRessourceTableView()
     listeNom << "Nom" << "Prenom";
     QStandardItemModel * standardItemModel = new QStandardItemModel(ressources.size(),2);
     standardItemModel->setHorizontalHeaderLabels(listeNom);
-    for (int row = 0; row < ressources.size(); ++row) {
+    for (unsigned int row = 0; row < ressources.size(); ++row) {
         Ressource * ressource = ressources[row];
         if(ressource != NULL){
         standardItemModel->setItem(row, 0, new QStandardItem(ressource->getName()));
@@ -121,7 +124,6 @@ void addPatient::updateRessourceTableView()
 
 void addPatient::on_deleteRessourceButton_clicked()
 {
-    QAbstractItemModel * model = this->ui->ressourceTableView->model();
     QItemSelectionModel * select = this->ui->ressourceTableView->selectionModel();
 
     if(!select->selectedRows().isEmpty()){

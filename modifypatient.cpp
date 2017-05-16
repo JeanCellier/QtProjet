@@ -43,7 +43,7 @@ void ModifyPatient::setPatient(Patient* patient){
 }
 
 Patient* ModifyPatient::getPatient(){
-
+    return this->patient;
 }
 
 ModifyPatient::~ModifyPatient()
@@ -85,10 +85,10 @@ void ModifyPatient::on_modifyPatientButton_clicked()
 
         vector<Ressource *> oldRessources = consultDAO->getRessourceByIdPatient(patient->getId());
 
-        for (int numRessource = 0; numRessource < ressources.size(); numRessource++){
+        for (unsigned int numRessource = 0; numRessource < ressources.size(); numRessource++){
                     Ressource* ressource = ressources[numRessource];
                     bool itemExist = false;
-                    for (int numRessource = 0; numRessource < oldRessources.size(); numRessource++){
+                    for (unsigned int numRessource = 0; numRessource < oldRessources.size(); numRessource++){
                         if(oldRessources[numRessource]->getId() == ressource->getId()){
                             oldRessources.erase(oldRessources.begin()+numRessource);
                             itemExist = true;
@@ -96,7 +96,7 @@ void ModifyPatient::on_modifyPatientButton_clicked()
                     }
                     if(!itemExist)consultDAO->addConsult(consultDAO->getMaxConsultId()+1,patient->getId(),ressource->getId());
                 }
-        for (int numRessource = 0; numRessource < oldRessources.size(); numRessource++){
+        for (unsigned int numRessource = 0; numRessource < oldRessources.size(); numRessource++){
             consultDAO->deleteConsultByValues(patient->getId(),oldRessources[numRessource]->getId());
         }
 
@@ -119,7 +119,7 @@ void ModifyPatient::updateRessourceTableView()
     listeNom << "Nom" << "Prenom";
     QStandardItemModel * standardItemModel = new QStandardItemModel(ressources.size(),2);
     standardItemModel->setHorizontalHeaderLabels(listeNom);
-    for (int row = 0; row < ressources.size(); ++row) {
+    for (unsigned int row = 0; row < ressources.size(); ++row) {
         Ressource * ressource = ressources[row];
         if(ressource != NULL){
         standardItemModel->setItem(row, 0, new QStandardItem(ressource->getName()));
@@ -131,7 +131,6 @@ void ModifyPatient::updateRessourceTableView()
 
 void ModifyPatient::on_deleteRessourceButton_clicked()
 {
-    QAbstractItemModel * model = this->ui->ressourceTableView->model();
     QItemSelectionModel * select = this->ui->ressourceTableView->selectionModel();
 
     if(!select->selectedRows().isEmpty()){
@@ -157,7 +156,7 @@ void ModifyPatient::on_addRessourceButton_clicked()
     RessourceDAO ressourceDAO;
     QStringList list = ui->ressourcesComboBox->currentText().split(' ');
     bool itemExist = false;
-    for (int numRessource = 0; numRessource < ressources.size(); numRessource++){
+    for (unsigned int numRessource = 0; numRessource < ressources.size(); numRessource++){
         if(ressources[numRessource]->getId() == list[0].toInt()){
             QMessageBox::warning(this, "Erreur de saisie", "Deux ressources identiques !");
             itemExist = true;

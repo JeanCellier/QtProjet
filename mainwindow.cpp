@@ -117,7 +117,7 @@ void MainWindow::update_ressourceTreeView()
                 QStandardItem *standardParent = new QStandardItem(type->getLabel());
                 rootNode-> appendRow(standardParent);
                 vector<Ressource*> ressources = ressourceDAO->getRessourcesByIdType(parent);
-                for (int row = 0; row < ressources.size(); row++) {
+                for (unsigned int row = 0; row < ressources.size(); row++) {
                         Ressource * ressource = ressources[row];
                         QStandardItem *standardRessource = new QStandardItem(ressource->getFirstName()+" "+ressource->getName());
                         standardParent-> appendRow(standardRessource);
@@ -145,7 +145,7 @@ void MainWindow::search_patientSearchTableView(vector<Patient*> vecPatient)
     listeNom << "Nom" << "Prenom" << "Jour de consultation" << "Numéro d'identification";
     QStandardItemModel * standardItemModel = new QStandardItemModel(vecPatient.size(),4);
     standardItemModel->setHorizontalHeaderLabels(listeNom);
-    for (int row = 0; row < vecPatient.size(); ++row) {
+    for (unsigned int row = 0; row < vecPatient.size(); ++row) {
         Patient * patient = vecPatient[row];
         if(patient != NULL){
         standardItemModel->setItem(row, 0, new QStandardItem(patient->getName()));
