@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Modification du personnel de soin</string>
   </property>
   <widget class="Line" name="line">
    <property name="geometry">
@@ -161,7 +161,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Ajout d'un personnel de soin</string>
+    <string>Modification du personnel de soin</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

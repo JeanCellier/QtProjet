@@ -209,7 +209,6 @@ void MainWindow::on_DeleteRessourceButton_clicked()
     QString text = data.toString();
 
     map<int, QString> names = ressourceDAO->getRessourcesFullNames();
-    std::cout << "allo : " << names.size() << std::endl;
     map<int, QString>::const_iterator mit;
 
     for(mit = names.begin();mit!=names.end();mit++) {
@@ -259,7 +258,6 @@ void MainWindow::on_ModifierButton_clicked()
     QString text = data.toString();
 
     map<int, QString> names = ressourceDAO->getRessourcesFullNames();
-    std::cout << "allo : " << names.size() << std::endl;
     map<int, QString>::const_iterator mit;
 
     for(mit = names.begin();mit!=names.end();mit++) {
