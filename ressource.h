@@ -3,6 +3,11 @@
 
 #include <QString>
 
+/**
+ * @brief The Ressource class
+ * Model class representing a Ressource in the database
+ */
+
 class Ressource
 {
 private :

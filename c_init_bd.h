@@ -3,6 +3,10 @@
 #include <QSqlDatabase>
 #include <QDate>
 
+/**
+ * Class filling the database at the start of the application
+ */
+
 class C_INIT_BD
 {
     private:
