@@ -28,7 +28,7 @@ void IdWindow::on_connectButton_clicked()
         accept();
 
     }else{
-        int ret = QMessageBox::warning(this, "Erreur de connexion", "Login ou mot de passe incorrect");
+        QMessageBox::warning(this, "Erreur de connexion", "Login ou mot de passe incorrect");
         this->ui->passwordLineEdit->setText("");
     }
 }

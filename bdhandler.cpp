@@ -21,6 +21,8 @@ QSqlQuery Bdhandler::openBD()
         QSqlQuery q(db);
         return q;
     }
+    QSqlQuery q(db);
+    return q;
 }
 
 void Bdhandler::closeBD()

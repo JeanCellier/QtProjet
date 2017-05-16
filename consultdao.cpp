@@ -87,7 +87,7 @@ vector<Ressource*> ConsultDAO::getRessourceByIdPatient(int idPatient){
             int idRessource = q.value(0).toInt();
             vecIdRessource.push_back(idRessource);
         }
-    for(int numRessource = 0; numRessource < vecIdRessource.size(); numRessource++){
+    for(unsigned int numRessource = 0; numRessource < vecIdRessource.size(); numRessource++){
             Ressource* r = ressourceDAO->getRessourceById(vecIdRessource[numRessource]);
             vecRessource.push_back(r);
         }
