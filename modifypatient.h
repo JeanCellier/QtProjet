@@ -6,36 +6,79 @@
 #include "patientDAO.h"
 #include "consultdao.h"
 
+/**
+ * Class allowing the creation of the modifypatient window
+ * This window allows the user to create a ressource in the database
+ */
+
 namespace Ui {
 class ModifyPatient;
 }
 
 class ModifyPatient : public QDialog
 {
-    Q_OBJECT
+        Q_OBJECT
 
-public:
-    explicit ModifyPatient(QWidget *parent = 0);
-    ~ModifyPatient();
-    void setPatient(Patient* patient);
-    Patient* getPatient();
-    void updateRessourceTableView();
+    public:
+        explicit ModifyPatient(QWidget *parent = 0);
+        ~ModifyPatient();
 
-private slots:
-    void on_modifyPatientButton_clicked();
+        /**
+         * @brief setPatient
+         * Sets the fields of the window with the previously selected patient
+         * @param patient
+         */
+        void setPatient(Patient* patient);
 
-    void on_deleteRessourceButton_clicked();
+        /**
+         * @brief getPatient
+         * Gets the entered patient
+         * @return
+         */
+        Patient* getPatient();
 
-    void on_calendar_selectionChanged();
+        /**
+         * @brief updateRessourceTableView
+         * Updates the ressource table view of the patient
+         */
+        void updateRessourceTableView();
 
-    void on_cancelButton_clicked();
+    private slots:
 
-    void on_addRessourceButton_clicked();
+        /**
+         * @brief on_modifyPatientButton_clicked
+         * Event method when the modify button is clicked
+         */
+        void on_modifyPatientButton_clicked();
 
-private:
-    Ui::ModifyPatient *ui;
-    vector<Ressource *> ressources;
-    Patient* patient;
+        /**
+         * @brief on_deleteRessourceButton_clicked
+         * Event method when the delete ressource button is clicked
+         */
+        void on_deleteRessourceButton_clicked();
+
+        /**
+         * @brief on_calendar_selectionChanged
+         * Event method when the calendar selection changes
+         */
+        void on_calendar_selectionChanged();
+
+        /**
+         * @brief on_cancelButton_clicked
+         * Event method when the cancel button is clicked
+         */
+        void on_cancelButton_clicked();
+
+        /**
+         * @brief on_addRessourceButton_clicked
+         * Event when the add ressource button is clicked
+         */
+        void on_addRessourceButton_clicked();
+
+    private:
+        Ui::ModifyPatient *ui;
+        vector<Ressource *> ressources;
+        Patient* patient;
 };
 
 #endif // MODIFYPATIENT_H

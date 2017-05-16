@@ -3,6 +3,9 @@
 
 #include <QDialog>
 
+/**
+ * Class allowing the creation of the about window
+ */
 namespace Ui {
 class about;
 }

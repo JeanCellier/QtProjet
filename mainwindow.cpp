@@ -27,10 +27,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_actionPatient_triggered(bool checked)
-{
-}
-
 void MainWindow::on_actionPatient_triggered()
 {
     addPatient addingPatient;
